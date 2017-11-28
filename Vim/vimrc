@@ -20,7 +20,8 @@ command S execute "normal OSystem.out.println();"
 
 let name = expand('%:r')
 
-au BufNewFile *.java exe "normal Opublic class"name "{\n\n"."public static void main(String[] args){\n".name tolower(name) "= new"name."()".";\n}\n}\<Esc>gg" |" this command copy the definition of the class, creates the main method and instanciates the class 
+" this command copies the definition of the class, creates the main method and instantiates the class when a java file has been created
+au BufNewFile *.java exe "normal Opublic class"name "{\n\n"."public static void main(String[] args){\n".name tolower(name) "= new"name."()".";\n}\n}\<Esc>gg" 
 
 " in this case the class description and the main method
 set cindent " auto indentation
