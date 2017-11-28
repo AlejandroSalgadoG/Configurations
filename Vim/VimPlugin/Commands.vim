@@ -2,21 +2,21 @@ let column="false"
 let indent="false"
 let mouse="true"
 
-noremap H :map<enter>
 noremap cc :call Column()<enter>
-noremap E :call Indent()<enter>
 noremap tt :tabnew<enter>
+noremap H :map<enter>
+noremap E :call Indent()<enter>
 noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
+noremap r <C-R>
+noremap W <C-W>
+noremap V <C-V>
+noremap <BS> <C-O>
 noremap <space> :call Clean()<enter>
 noremap <bar> :call Compile()<enter>
 noremap <F2> :call LatexBib()<enter>
 noremap <F3> :call Latex()<enter>
 noremap <F4> :call LatexDiap()<enter>
-noremap r <C-R>
-noremap W <C-W>
-noremap V <C-V>
-noremap <BS> <C-O>
 
 au BufNewFile *.C :call Cpp()
 au BufNewFile *.h :call Hpp()
@@ -24,6 +24,71 @@ au BufNewFile *.java :call Java()
 au BufNewFile *.cs :call Csharp()
 au BufNewFile *.hs :call Haskell()
 au BufRead Makefile set noexpandtab
+
+function! Column()
+    exe "set colorcolumn=".join(range(81,200),',')
+    if g:column == "false"
+        exe "highlight ColorColumn ctermbg=7"
+        let g:column="true"
+    else
+        exe "highlight ColorColumn ctermbg=0"
+        let g:column="false"
+    endif
+endfunction
+
+function! Indent()
+    if g:indent == "true"
+        set cindent
+        echom "Indent enabled"
+        let g:indent="false"
+    else
+        set nocindent
+        echom "Indent disabled"
+        let g:indent="true"
+    endif
+endfunction
+
+function! Print()
+    let extension=expand('%:e')
+    if extension == "C"
+        :call PrintCpp()
+    elseif extension == "java"
+        :call PrintJava()
+    elseif extension == "cs"
+        :call PrintCsharp()
+    endif
+endfunction
+
+function! PrintCpp()
+    exe "normal ocout <<  << endl;"
+    exe "normal 8h"
+endfunction
+
+function! PrintJava()
+    exe "normal oSystem.out.println();"
+    exe "normal 1h"
+endfunction
+
+function! PrintCsharp()
+    exe "normal oConsole.WriteLine();"
+    exe "normal 1h"
+endfunction
+
+function! Mouse()
+    if g:mouse == "true"
+        set mouse=r
+        echom "Mouse disabled"
+        let g:mouse="false"
+    else
+        set mouse=a
+        echom "Mouse enabled"
+        let g:mouse="true"
+    endif
+endfunction
+
+function! Clean()
+    exe '%s/\s\+$//'
+endfunction
 
 function! Compile()
     let extension=expand('%:e')
@@ -36,15 +101,6 @@ function! Compile()
     elseif extension == "hs"
         :call Ghc()
     endif
-endfunction
-
-function! Cpp()
-    exe "normal i#include <iostream>\n\n
-        \using namespace std;\n\n
-        \int main(int argc, char *argv[]){\n\n
-        \}"
-    exe "normal k"
-    exe "normal i\t"
 endfunction
 
 function! Gpp()
@@ -83,29 +139,6 @@ function! MakeCppExe(name)
     exe "normal o\nexe:\n\t./".a:name
 endfunction
 
-function! Hpp()
-    let name=toupper(expand('%:r'))
-    exe "normal i#ifndef"name"\n
-        \#define"name"\n
-        \\n
-        \\n
-        \\n
-        \#endif"
-    call Clean()
-    exe "normal 2j"
-endfunction
-
-function! Java()
-    let name=expand('%:r')
-    exe "normal ipublic class ".name."{\n\n
-        \public ".name."(){\n\n}\n\n
-        \public static void main(String[] args){\n\n
-        \}\n
-        \}"
-    exe "normal gg"
-    exe "normal w"
-endfunction
-
 function! Javac(...)
     let name=expand('%:r')
     if filereadable("Makefile")
@@ -136,18 +169,6 @@ endfunction
 
 function! MakeJavaExe(name)
     exe "normal o\nexe:\n\tjava ".a:name
-endfunction
-
-function! Csharp()
-    let name=expand('%:r')
-    exe "normal iusing System;\n"
-    exe "normal opublic class ".name."{\n\n
-        \public static void Main(string[] args){
-        \\n\n
-        \}\n\n
-        \}"
-    exe "normal 3k"
-    exe "normal i\t\t"
 endfunction
 
 function! Gmcs()
@@ -182,10 +203,6 @@ function! MakeCsharpExe(name)
     exe "normal o\nexe:\n\t./".a:name
 endfunction
 
-function! Haskell()
-    exe "normal imain = print()"
-endfunction
-
 function! Ghc(...)
     echom system("ghc ".expand('%'))
     exe "!if [ $? -eq 0 ]; then
@@ -194,69 +211,52 @@ function! Ghc(...)
         \ fi"
 endfunction
 
-function! Clean()
-    exe '%s/\s\+$//'
+function! Cpp()
+    exe "normal i#include <iostream>\n\n
+        \using namespace std;\n\n
+        \int main(int argc, char *argv[]){\n\n
+        \}"
+    exe "normal k"
+    exe "normal i\t"
 endfunction
 
-function! Print()
-    let extension=expand('%:e')
-    if extension == "C"
-        :call PrintCpp()
-    elseif extension == "java"
-        :call PrintJava()
-    elseif extension == "cs"
-        :call PrintCsharp()
-    endif
+function! Hpp()
+    let name=toupper(expand('%:r'))
+    exe "normal i#ifndef"name"\n
+        \#define"name"\n
+        \\n
+        \\n
+        \\n
+        \#endif"
+    call Clean()
+    exe "normal 2j"
 endfunction
 
-function! PrintCpp()
-    exe "normal ocout <<  << endl;"
-    exe "normal 8h"
+function! Java()
+    let name=expand('%:r')
+    exe "normal ipublic class ".name."{\n\n
+        \public ".name."(){\n\n}\n\n
+        \public static void main(String[] args){\n\n
+        \}\n
+        \}"
+    exe "normal gg"
+    exe "normal w"
 endfunction
 
-function! PrintJava()
-    exe "normal oSystem.out.println();"
-    exe "normal 1h"
+function! Csharp()
+    let name=expand('%:r')
+    exe "normal iusing System;\n"
+    exe "normal opublic class ".name."{\n\n
+        \public static void Main(string[] args){
+        \\n\n
+        \}\n\n
+        \}"
+    exe "normal 3k"
+    exe "normal i\t\t"
 endfunction
 
-function! PrintCsharp()
-    exe "normal oConsole.WriteLine();"
-    exe "normal 1h"
-endfunction
-
-function! Indent()
-    if g:indent == "true"
-        set cindent
-        echom "Indent enabled"
-        let g:indent="false"
-    else
-        set nocindent
-        echom "Indent disabled"
-        let g:indent="true"
-    endif
-endfunction
-
-function! Mouse()
-    if g:mouse == "true"
-        set mouse=r
-        echom "Mouse disabled"
-        let g:mouse="false"
-    else
-        set mouse=a
-        echom "Mouse enabled"
-        let g:mouse="true"
-    endif
-endfunction
-
-function! Column()
-    exe "set colorcolumn=".join(range(81,200),',')
-    if g:column == "false"
-        exe "highlight ColorColumn ctermbg=7"
-        let g:column="true"
-    else
-        exe "highlight ColorColumn ctermbg=0"
-        let g:column="false"
-    endif
+function! Haskell()
+    exe "normal imain = print()"
 endfunction
 
 function! LatexDiap()
