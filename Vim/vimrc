@@ -1,7 +1,6 @@
-so /home/alejandro/Github/Vim/VimPlugin/Commands.vim
+so /home/alejandro/Github/Vim/VimPlugin/Commands.vim " commands
+so /home/alejandro/Github/Vim/VimPlugin/Scheme.vim " theme
 
-color zellner " theme
-syntax on " Colors on
 set hlsearch " highlight the search
 set mouse=a " allows to use the mouse in all modes
 set cindent " indent
@@ -20,5 +19,4 @@ set noswapfile
 set nobackup
 set nowb
 
-highlight WhiteSpace ctermbg=red
 match WhiteSpace /\s\+$/

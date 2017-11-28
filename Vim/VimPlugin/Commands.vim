@@ -18,12 +18,16 @@ noremap <F7> :call LatexDiap()<enter>
 noremap r <C-R>
 noremap W ww
 
-
 au BufNewFile *.C :call Cpp()
+au BufNewFile *.h :call Hpp()
 au BufNewFile *.java :call Java()
 au BufNewFile *.hs :call Haskell()
 au BufNewFile Makefile :call MakeClean()
 au BufRead Makefile set noexpandtab
+
+function! Pbs(from, to)
+    exe a:from.",".a:to."d"
+endfunction
 
 function! Gcc()
     let name=expand('%:r')
@@ -47,6 +51,18 @@ function! Cpp()
         \using namespace std;\n\n
         \int main(int argc, char *argv[]){\n\n
         \}"
+endfunction
+
+function! Hpp()
+    let name=toupper(expand('%:r'))
+    exe "normal i#ifndef"name"\n
+        \#define"name"\n
+        \\n
+        \\n
+        \\n
+        \#endif"
+    call Clean()
+    exe "normal 2j"
 endfunction
 
 function! MakeCppHead(name)
@@ -150,7 +166,7 @@ function! Column()
         exe "highlight ColorColumn ctermbg=7"
         let g:column="true"
     else
-        exe "highlight ColorColumn ctermbg=8"
+        exe "highlight ColorColumn ctermbg=0"
         let g:column="false"
     endif
 endfunction
