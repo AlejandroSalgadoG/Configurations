@@ -63,7 +63,9 @@ function! Load(program)
     let compile=cmdPath.a:program."/Compilation.vim"
     let interpret=cmdPath.a:program."/Interpret.vim"
 
-    exe "so ".auto
+    if filereadable(auto)
+    	exe "so ".auto
+    endif
 
     if filereadable(print)
         exe "so ".print
