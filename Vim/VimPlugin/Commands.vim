@@ -167,7 +167,7 @@ function! MakeJavaHead(name)
 endfunction
 
 function! MakeJavaClean(name)
-    exe "normal o\nclean:\n\trm -f *.class ".a:name
+    exe "normal o\nclean:\n\trm -f *.class "
 endfunction
 
 function! MakeJavaExe(name)
