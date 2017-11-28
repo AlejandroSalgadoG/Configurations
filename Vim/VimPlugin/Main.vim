@@ -18,6 +18,7 @@ noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
 noremap r <C-R>
 noremap W <C-W>
+noremap U :call Sudo()<enter>
 noremap V <C-V>
 noremap <BS> <C-O>
 noremap <space> :call Clean()<enter>
@@ -162,6 +163,10 @@ function! Indent()
         let g:indent="true"
     endif
 
+endfunction
+
+function! Sudo()
+    exe "w !sudo tee % > /dev/null"
 endfunction
 
 call Start()
