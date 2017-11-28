@@ -1,0 +1,51 @@
+"the run command compiles, runs a java file and delete the .class file:
+"Here's the code
+
+"run(){
+"   program=$1 
+"   javac $1 
+"   if [ $? -eq 0 ]; then
+"       if [ -z $2 ]; then 
+"           java ${program/.java/""}  
+"       else 
+"           java ${program/.java/""} ${*:2} 
+"       fi
+"   fi
+"           
+"   rm -f *.class
+"}
+
+command W execute "!run %" "executes the run command with the current file
+command T execute "tabnew" "Open a new tab 
+
+au BufNewFile *.java 0r /path/to/formatFile "allows to auto insert of something into all the java files,
+"in this case the class description and the main method
+
+
+set cindent "auto indentation
+set hlsearch "highlight the search
+set mouse=a "allows to use the mouse in all modes
+
+"set tab as 4 spaces
+set smarttab        
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+set tabstop=4 
+
+set wildmenu "Menu for auto completation
+set cursorline "Line over the current position 
+
+set autoread "Automatically update the files if an external change occurs
+		
+"Dont create extra file 
+set noswapfile 
+set nobackup
+set nowb 
+
+set shellcmdflag=-ic "allows to use the alias
+
+syntax on "Colors on
+color zellner "set the theme
