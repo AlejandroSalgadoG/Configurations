@@ -277,7 +277,7 @@ function! LatexBib()
         \     latex ".expand('%').";
         \     latex ".expand('%').";
         \     pdflatex ".expand('%').";
-        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log;
+        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log *.vrb;
         \     gnome-open ".expand('%:r').".pdf;
         \ fi"
 endfunction
