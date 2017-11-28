@@ -98,7 +98,7 @@ endfunction
 
 function! Compile()
     let extension=expand('%:e')
-    if extension == "C"
+    if extension == "C" || extension == "h"
         :call Gpp()
     elseif extension == "java"
         :call Javac()
@@ -112,6 +112,7 @@ endfunction
 function! Gpp()
     let name=expand('%:r')
     if filereadable("Makefile")
+        make clean
         make
         make exe
     else
@@ -146,6 +147,7 @@ endfunction
 function! Javac(...)
     let name=expand('%:r')
     if filereadable("Makefile")
+        make clean
         make
         make exe
     else
@@ -177,6 +179,7 @@ endfunction
 function! Gmcs()
     let name=expand('%:r')
     if filereadable("Makefile")
+        make clean
         make
         make exe
     else
@@ -223,15 +226,8 @@ function! Cpp()
 endfunction
 
 function! Hpp()
-    let name=toupper(expand('%:r'))
-    exe "normal i#ifndef"name"\n
-        \#define"name"\n
-        \\n
-        \\n
-        \\n
-        \#endif"
-    call Clean()
-    exe "normal 2j"
+    exe "normal i#pragma once"
+    exe "normal o"
 endfunction
 
 function! Java()
