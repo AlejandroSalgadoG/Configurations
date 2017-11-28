@@ -4,7 +4,7 @@ syntax reset
 " hi CursorLine ctermbg=Gray ctermfg=Black
 hi Search ctermbg=Blue ctermfg=White
 hi NonText ctermfg=Red
-hi Comment ctermbg=Black ctermfg=Red cterm=NONE
+hi Comment ctermbg=Black ctermfg=White cterm=NONE
 hi WildMenu cterm=bold ctermbg=Black ctermfg=White
 hi String ctermfg=Red cterm=NONE
 hi Visual cterm=NONE ctermfg=Blue ctermbg=White
