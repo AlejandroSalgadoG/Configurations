@@ -16,6 +16,8 @@ set noswapfile
 set nobackup
 set nowb
 
+set syntax on " Set colors
+
 so ~/Github/Vim/VimPlugin/Main.vim " commands
 so ~/Github/Vim/VimPlugin/Scheme.vim " theme
 
