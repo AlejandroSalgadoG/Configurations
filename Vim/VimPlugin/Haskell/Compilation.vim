@@ -1,8 +1,10 @@
 function! Ghc()
     if filereadable("Makefile")
         exe "!make ".g:mkargs
-
-        exe "!".g:cmd.g:name." ".g:args
+        if v:shell_error
+            return
+        endif
+        exe "!".g:cmd.expand('%:r')." ".g:args
     else
         exe "normal tt"
         call MakeGhcHead()

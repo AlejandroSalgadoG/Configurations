@@ -1,17 +1,13 @@
 function! PdfLatex()
     if filereadable("Makefile")
         exe "!make ".g:mkargs
-
-        for output in getqflist()
-            if output.valid == "1"
-                return
-            endif
-        endfor
-
-        exe "!mupdf ".g:name.".pdf"
+        if v:shell_error
+            return
+        endif
+        exe "!".g:cmd.expand('%:r')." ".g:args
 
     elseif filereadable(g:name.".bib")
-    echom "Bib"
+        echom "Bib"
         exe "normal tt"
         call MakeLatexBibHead()
         call MakeLatexBibClean()

@@ -1,14 +1,10 @@
 function! Gmcs()
     if filereadable("Makefile")
         exe "!make ".g:mkargs
-
-        for output in getqflist()
-            if output.valid == "1"
-                return
-            endif
-        endfor
-
-        exe "!".g:cmd.g:name." ".g:args
+        if v:shell_error
+            return
+        endif
+        exe "!".g:cmd.expand('%:r')." ".g:args
     else
         exe "normal tt"
         call MakeCsharpHead()
