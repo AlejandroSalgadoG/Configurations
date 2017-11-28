@@ -3,7 +3,6 @@ let indent="false"
 let mouse="true"
 let extension=expand('%:e')
 
-noremap cc :call Column()<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
 noremap E :call Indent()<enter>
@@ -126,20 +125,6 @@ endfunction
 
 function! Clean()
     exe '%s/\s\+$//'
-endfunction
-
-function! Column()
-
-    exe "set colorcolumn=".join(range(81,200),',')
-
-    if g:column == "false"
-        exe "highlight ColorColumn ctermbg=7"
-        let g:column="true"
-    else
-        exe "highlight ColorColumn ctermbg=0"
-        let g:column="false"
-    endif
-
 endfunction
 
 function! Indent()

@@ -39,7 +39,7 @@ endfunction
 
 function! MakeLatexExe(name)
     exe "normal o\nexe:\n
-        \\tgnome-open ".a:name.".pdf"
+        \\tmupdf ".a:name.".pdf"
 endfunction
 
 function! MakeLatexBibHead(name)
