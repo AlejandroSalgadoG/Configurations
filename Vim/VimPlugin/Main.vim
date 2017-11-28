@@ -31,6 +31,8 @@ endfunction
 function Start()
     if g:extension == "C" || g:extension == "h"
         call Load("Cpp")
+    elseif g:extension == "c"
+        call Load("C")
     elseif g:extension == "java"
         call Load("Java")
     elseif g:extension == "cs"
@@ -80,6 +82,8 @@ endfunction
 function! Print()
     if g:extension == "C"
         :call PrintCpp()
+    elseif g:extension == "c"
+        :call PrintC()
     elseif g:extension == "java"
         :call PrintJava()
     elseif g:extension == "cs"
@@ -106,6 +110,8 @@ endfunction
 function! Compile()
     if g:extension == "C" || g:extension == "h"
         :call Gpp()
+    elseif g:extension == "c"
+        :call Gcc()
     elseif g:extension == "java"
         :call Javac()
     elseif g:extension == "cs"
