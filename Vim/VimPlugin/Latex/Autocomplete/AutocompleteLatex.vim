@@ -6,6 +6,7 @@ function! Latex()
         \\\usepackage[utf8]{inputenc}\n\n
         \\\begin{document}\n\n
         \    \\title{}\n
+        \    \\author{}\n
         \    \\date{}\n\n
         \    \\maketitle\n\n
         \\\end{document}"
