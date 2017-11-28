@@ -1,7 +1,7 @@
 " the run and hrun commands are implemented on the repository bash, into the bash_aliases file
 
 command W execute "!run %" |" executes the run command with the current file
-command H execute "!run %" |" executes the hrun command with the current file
+command H execute "!hrun %" |" executes the hrun command with the current file
 command T execute "tabnew" |" Open a new tab
 command S execute "normal OSystem.out.println();"
 
