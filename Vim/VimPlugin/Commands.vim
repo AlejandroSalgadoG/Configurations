@@ -150,7 +150,7 @@ function! Column()
         exe "highlight ColorColumn ctermbg=7"
         let g:column="true"
     else
-        exe "highlight ColorColumn ctermbg=0"
+        exe "highlight ColorColumn ctermbg=8"
         let g:column="false"
     endif
 endfunction
