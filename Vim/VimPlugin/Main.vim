@@ -33,6 +33,8 @@ function Start()
         call Load("Cpp")
     elseif g:extension == "c"
         call Load("C")
+    elseif g:extension == "m"
+        call Load("Octave")
     elseif g:extension == "java"
         call Load("Java")
     elseif g:extension == "cs"
@@ -84,6 +86,8 @@ function! Print()
         :call PrintCpp()
     elseif g:extension == "c"
         :call PrintC()
+    elseif g:extension == "m"
+        :call PrintOctave()
     elseif g:extension == "java"
         :call PrintJava()
     elseif g:extension == "cs"
@@ -114,6 +118,8 @@ function! Compile()
         :call Gpp()
     elseif g:extension == "c"
         :call Gcc()
+    elseif g:extension == "m"
+        :call OctaveC()
     elseif g:extension == "java"
         :call Javac()
     elseif g:extension == "cs"
