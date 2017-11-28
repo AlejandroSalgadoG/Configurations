@@ -5,24 +5,57 @@ noremap H :map<enter>
 noremap C :call Column()<enter>
 noremap I :call Indent()<enter>
 noremap T :tabnew<enter>
-noremap S :call Sop()<enter>
+noremap S :call Print()<enter>
 noremap <space> :call Clean()<enter>
 noremap <F2> :call Javac()<enter>
-noremap <F3> :call Ghc()<enter>
-noremap <F4> :call LatexBib()<enter>
-noremap <F5> :call Latex()<enter>
-noremap <F6> :call LatexDiap()<enter>
+noremap <F3> :call Gcc()<enter>
+noremap <F4> :call Ghc()<enter>
+noremap <F5> :call LatexBib()<enter>
+noremap <F6> :call Latex()<enter>
+noremap <F7> :call LatexDiap()<enter>
 noremap U <C-R>
 noremap W <C-W>
 
 
+au BufNewFile *.C :call Cpp()
 au BufNewFile *.java :call Java()
 au BufNewFile *.hs :call Haskell()
-au BufNewFile,BufRead Makefile :call Make()
+au BufNewFile Makefile :call MakeClean()
+au BufRead Makefile set noexpandtab
 
-function! Make()
-    exe "set noexpandtab"
-    exe "normal i\n\nclean:\n	rm -f *.o"
+function! Gcc()
+    let name=expand('%:r')
+    if filereadable("Makefile")
+        exe "!make"
+        exe "!./".name
+    else
+        set noexpandtab
+        set nocindent
+        exe "normal T"
+        call MakeCppHead(name)
+        call MakeClean()
+        write Makefile
+        quit
+        call Gcc()
+    endif
+endfunction
+
+function! Cpp()
+    exe "normal i#include <iostream>\n\n
+        \using namespace std;\n\n
+        \int main(int argc, char *argv[]){\n\n
+        \}"
+endfunction
+
+function! MakeCppHead(name)
+    exe "normal i".a:name.": ".a:name.".o\n
+        \\tg++ ".a:name.".o -o ".a:name."\n\n"
+        \.a:name.".o: ".a:name.".C\n
+        \\tg++ -c ".a:name.".C"
+endfunction
+
+function! MakeClean()
+    exe "normal o\nclean:\n\trm -f *.o"
 	exe "normal gg"
 endfunction
 
@@ -74,8 +107,15 @@ function! Clean()
     exe '%s/\s\+$//'
 endfunction
 
-function! Sop()
-    exe "normal oSystem.out.println();"
+function! Print()
+    let extension=expand('%:e')
+    if extension == "C"
+        exe "normal ocout <<  << endl;"
+        exe "normal 8h"
+    elseif extension == "java"
+        exe "normal oSystem.out.println();"
+        exe "normal 1h"
+    endif
 endfunction
 
 function! Indent()
