@@ -2,7 +2,6 @@ let column="false"
 let indent="false"
 let mouse="true"
 
-
 noremap cc :call Column()<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
