@@ -1,5 +1,6 @@
 command W execute "!run %"
 command T execute "tabnew"
+command S execute "normal OSystem.out.println();"
 
 let name = expand('%:r')
 
