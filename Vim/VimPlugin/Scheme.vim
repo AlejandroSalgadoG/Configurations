@@ -20,3 +20,8 @@ hi Conditional ctermfg=Yellow term=bold
 hi Repeat ctermfg=Yellow term=bold
 hi Exception ctermfg=Yellow term=bold
 hi Statement ctermfg=Magenta cterm=NONE
+
+hi texCmdName ctermfg=Yellow
+hi texSection ctermfg=Blue
+hi Special ctermfg=White
+hi texStatement ctermfg=White
