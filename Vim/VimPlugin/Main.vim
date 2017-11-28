@@ -29,6 +29,8 @@ function Start()
         call Load("Cpp")
     elseif g:extension == "c"
         call Load("C")
+    elseif g:extension == "sh"
+        call Load("Bash")
     elseif g:extension == "m"
         call Load("Octave")
     elseif g:extension == "java"
@@ -90,6 +92,8 @@ function! Run()
         :call Gpp()
     elseif g:extension == "c"
         :call Gcc()
+    elseif g:extension == "sh"
+        :call BashC()
     elseif g:extension == "m"
         :call OctaveC()
     elseif g:extension == "java"
