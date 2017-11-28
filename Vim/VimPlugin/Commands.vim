@@ -6,17 +6,25 @@ noremap C :call Column()<enter>
 noremap I :call Indent()<enter>
 noremap T :tabnew<enter>
 noremap S :call Sop()<enter>
-noremap W :call Clean()<enter>
+noremap <space> :call Clean()<enter>
 noremap <F2> :call Javac()<enter>
 noremap <F3> :call Ghc()<enter>
 noremap <F4> :call LatexBib()<enter>
 noremap <F5> :call Latex()<enter>
 noremap <F6> :call LatexDiap()<enter>
 noremap U <C-R>
+noremap W <C-W>
+
 
 au BufNewFile *.java :call Java()
 au BufNewFile *.hs :call Haskell()
-au BufNewFile,BufRead Makefile exe "set noexpandtab"
+au BufNewFile,BufRead Makefile :call Make()
+
+function! Make()
+    exe "set noexpandtab"
+    exe "normal i\n\nclean:\n	rm -f *.o"
+	exe "normal gg"
+endfunction
 
 function! LatexDiap()
     exe "!pdflatex ".expand('%').";
