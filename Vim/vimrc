@@ -1,6 +1,3 @@
-so /home/alejandro/Github/Vim/VimPlugin/Commands.vim " commands
-so /home/alejandro/Github/Vim/VimPlugin/Scheme.vim " theme
-
 set hlsearch " highlight the search
 set mouse=a " allows to use the mouse in all modes
 set cindent " indent
@@ -18,5 +15,8 @@ set softtabstop=4
 set noswapfile
 set nobackup
 set nowb
+
+so ~/Github/Vim/VimPlugin/Main.vim " commands
+so ~/Github/Vim/VimPlugin/Scheme.vim " theme
 
 match WhiteSpace /\s\+$/ " highlight the unwanted spaces

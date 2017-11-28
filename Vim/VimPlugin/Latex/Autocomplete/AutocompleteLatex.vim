@@ -1,5 +1,7 @@
 au BufNewFile *.tex :call Latex()
 
+noremap T :call Itemize()<enter>
+
 function! Latex()
     set nocindent
     exe "normal i\\documentclass{article}\n\n
@@ -11,4 +13,10 @@ function! Latex()
         \    \\maketitle\n\n
         \\\end{document}"
     set cindent
+endfunction
+
+function! Itemize()
+    exe "normal i\\begin{itemize}\n
+        \    \\item\n
+        \\\end{itemize}"
 endfunction
