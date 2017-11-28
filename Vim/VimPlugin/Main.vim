@@ -5,9 +5,11 @@ let extension=expand('%:e')
 
 let cmd="./"
 let args=""
+let mkargs=""
 
 noremap <F2> :let args=""<left>
 noremap <F3> :let cmd=""<left>
+noremap <F4> :let mkargs=""<left>
 noremap J gq<left>
 noremap L :noh<enter>
 noremap cc :call Column()<enter>

@@ -1,13 +1,7 @@
 function! Gcc()
     let name=expand('%:r')
     if filereadable("Makefile")
-        make
-
-        for output in getqflist()
-            if output.valid == "1"
-                return
-            endif
-        endfor
+        exe "!make ".g:mkargs
 
         exe "!".g:cmd.name." ".g:args
     else

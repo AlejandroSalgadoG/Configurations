@@ -1,7 +1,7 @@
 function! Gmcs()
     let name=expand('%:r')
     if filereadable("Makefile")
-        make
+        exe "!make ".g:mkargs
 
         for output in getqflist()
             if output.valid == "1"
