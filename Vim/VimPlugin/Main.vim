@@ -1,10 +1,6 @@
 let column="false"
 let indent="false"
 let mouse="true"
-let cmdPath="/home/alejandro/Github/Vim/VimPlugin/"
-let auto="/Autocomplete"
-let compile="/Compilation"
-let print="/Print"
 let extension=expand('%:e')
 
 noremap cc :call Column()<enter>
@@ -18,7 +14,7 @@ noremap W <C-W>
 noremap V <C-V>
 noremap <BS> <C-O>
 noremap <space> :call Clean()<enter>
-noremap <bar> :call Compile()<enter>
+noremap <bar> :call Run()<enter>
 
 au BufNewFile Makefile :call Make()
 au BufRead Makefile :call Make()
@@ -49,39 +45,29 @@ function Start()
 endfunction
 
 function! Load(program)
-    exe "so ".g:cmdPath.a:program.g:auto.g:auto.a:program.".vim"
 
-    if filereadable(g:cmdPath.a:program.g:auto.g:print.a:program.".vim")
-        exe "so ".g:cmdPath.a:program.g:auto.g:print.a:program.".vim"
+    let cmdPath=expand('~/Github/Vim/VimPlugin/')
+    let auto=cmdPath.a:program."/Autocomplete.vim"
+    let print=cmdPath.a:program."/Print.vim"
+    let compile=cmdPath.a:program."/Compilation.vim"
+    let interpret=cmdPath.a:program."/Interpret.vim"
+
+    exe "so ".auto
+
+    if filereadable(print)
+        exe "so ".print
     endif
 
-    exe "so ".g:cmdPath.a:program.g:compile.g:compile.a:program.".vim"
-endfunction
-
-function! Column()
-    exe "set colorcolumn=".join(range(81,200),',')
-    if g:column == "false"
-        exe "highlight ColorColumn ctermbg=7"
-        let g:column="true"
+    if filereadable(compile)
+        exe "so ".compile
     else
-        exe "highlight ColorColumn ctermbg=0"
-        let g:column="false"
+        exe "so ".interpret
     endif
-endfunction
 
-function! Indent()
-    if g:indent == "true"
-        set cindent
-        echom "Indent enabled"
-        let g:indent="false"
-    else
-        set nocindent
-        echom "Indent disabled"
-        let g:indent="true"
-    endif
 endfunction
 
 function! Print()
+
     if g:extension == "C"
         :call PrintCpp()
     elseif g:extension == "c"
@@ -95,25 +81,11 @@ function! Print()
     elseif g:extension == "asm"
         :call PrintAsm()
     endif
+
 endfunction
 
-function! Mouse()
-    if g:mouse == "true"
-        set mouse=r
-        echom "Mouse disabled"
-        let g:mouse="false"
-    else
-        set mouse=a
-        echom "Mouse enabled"
-        let g:mouse="true"
-    endif
-endfunction
+function! Run()
 
-function! Clean()
-    exe '%s/\s\+$//'
-endfunction
-
-function! Compile()
     if g:extension == "C" || g:extension == "h"
         :call Gpp()
     elseif g:extension == "c"
@@ -131,6 +103,53 @@ function! Compile()
     elseif g:extension == "asm" || g:extension == "inc"
         :call Nasm()
     endif
+
+endfunction
+
+function! Mouse()
+
+    if g:mouse == "true"
+        set mouse=r
+        echom "Mouse disabled"
+        let g:mouse="false"
+    else
+        set mouse=a
+        echom "Mouse enabled"
+        let g:mouse="true"
+    endif
+
+endfunction
+
+function! Clean()
+    exe '%s/\s\+$//'
+endfunction
+
+function! Column()
+
+    exe "set colorcolumn=".join(range(81,200),',')
+
+    if g:column == "false"
+        exe "highlight ColorColumn ctermbg=7"
+        let g:column="true"
+    else
+        exe "highlight ColorColumn ctermbg=0"
+        let g:column="false"
+    endif
+
+endfunction
+
+function! Indent()
+
+    if g:indent == "true"
+        set cindent
+        echom "Indent enabled"
+        let g:indent="false"
+    else
+        set nocindent
+        echom "Indent disabled"
+        let g:indent="true"
+    endif
+
 endfunction
 
 call Start()

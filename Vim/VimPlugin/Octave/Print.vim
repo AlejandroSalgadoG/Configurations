@@ -1,4 +1,4 @@
 function! PrintOctave()
-    exe "normal odisp()"
+    exe "normal oprintf()"
     exe "normal h"
 endfunction
