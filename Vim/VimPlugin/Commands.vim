@@ -3,9 +3,9 @@ let indent="false"
 let mouse="true"
 
 noremap H :map<enter>
-noremap C :call Column()<enter>
+noremap cc :call Column()<enter>
 noremap I :call Indent()<enter>
-noremap T :tabnew<enter>
+noremap tt :tabnew<enter>
 noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
 noremap <space> :call Clean()<enter>
@@ -15,8 +15,8 @@ noremap <F4> :call Ghc()<enter>
 noremap <F5> :call LatexBib()<enter>
 noremap <F6> :call Latex()<enter>
 noremap <F7> :call LatexDiap()<enter>
-noremap U <C-R>
-noremap W <C-W>
+noremap U r
+noremap W ww
 
 
 au BufNewFile *.C :call Cpp()
@@ -33,7 +33,7 @@ function! Gcc()
     else
         set noexpandtab
         set nocindent
-        exe "normal T"
+        exe "normal tt"
         call MakeCppHead(name)
         call MakeClean()
         write Makefile
