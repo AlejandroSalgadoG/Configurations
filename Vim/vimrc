@@ -22,6 +22,9 @@ so ~/Github/Vim/VimPlugin/Main.vim " commands
 so ~/Github/Vim/VimPlugin/Scheme.vim " theme
 
 match WhiteSpace /\s\+$/ " highlight the unwanted spaces
+                         " \s whitespaces
+                         " \+ match more than one
+                         " $ until end of line
 
-highlight OverLength ctermbg=red ctermfg=white
-match OverLength /\%81v.\+/
+set colorcolumn=81
+highlight ColorColumn ctermbg=4
