@@ -1,18 +1,36 @@
 " the run and hrun commands are implemented on the repository bash, into the bash_aliases file
 
+command B execute "!run2 %"
+command A execute "!run3 %"
+
 command W execute "!run %" |" executes the run command with the current file
 command H execute "!hrun %" |" executes the hrun command with the current file
 command T execute "tabnew" |" Open a new tab
 command S execute "normal OSystem.out.println();"
+command LB execute "!pdfbib %"
+command L execute "!pdf %"
+command D execute "!diap %"
+command I execute "set cindent"
+command NI execute "set nocindent"
+command C execute "set colorcolumn=" . join(range(81,150), ',') | execute "highlight ColorColumn ctermbg=7"
+command NC execute "highlight ColorColumn ctermbg=0"
+
+command WH execute '%s/\s\+$//'
 
 let name = expand('%:r')
 
 au BufNewFile *.java exe "normal Opublic class"name "{\n\n"."public static void main(String[] args){\n".name tolower(name) "= new"name."()".";\n}\n}\<Esc>gg"
+au BufNewFile *.hs exe "normal Omain = print()"
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 
 " in this case the class description and the main method
-set cindent " auto indentation
 set hlsearch " highlight the search
 set mouse=a " allows to use the mouse in all modes
+
+set cindent
 
 " set tab as 4 spaces
 set smarttab
@@ -25,12 +43,12 @@ set tabstop=4
 set wildmenu " Menu for auto completation
 set cursorline " Line over the current position
 set autoread " Automatically update the files if an external change occurs
-   
+
 " Dont create extra file
 set noswapfile
 set nobackup
 set nowb
-   
+
 set shellcmdflag=-ic " allows to use the alias
 syntax on " Colors on
 color zellner
