@@ -16,6 +16,7 @@ function! PdfLatex()
     else
         exe "normal tt"
         call MakeLatexHead(name)
+        call MakeLatexClean(name)
         call MakeLatexExe(name)
         exe "normal gg"
         write Makefile
@@ -28,13 +29,12 @@ function! MakeLatexHead(name)
     :call Make()
     exe "normal i".a:name.".pdf: "a:name.".tex\n
         \\tpdflatex ".a:name.".tex\n
-        \\trm -f *.nav *.snm *.toc *.out *.dvi *.blg *.bbl *.aux *.log"
+        \\trm -f *.nav *.snm *.toc* .out *.dvi *.blg *.bbl *.aux *.log"
 endfunction
 
 function! MakeLatexClean(name)
     exe "normal o\nclean:\n
-        \\trm -f *.nav *.snm *.toc* .out *.dvi *.blg *.bbl *.aux *.log
-        \ ".a:name.".pdf"
+        \\trm -f ".a:name.".pdf"
 endfunction
 
 function! MakeLatexExe(name)
