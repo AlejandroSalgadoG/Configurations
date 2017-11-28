@@ -13,7 +13,7 @@ noremap <F2> :let args=""<left>
 noremap <F3> :let cmd=""<left>
 noremap <F4> :let mkargs=""<left>
 noremap K :call MakeThis()<enter>
-noremap I :call MakeExe()<enter>
+noremap X :call MakeExe()<enter>
 noremap J gq<left>
 noremap L :noh<enter>
 noremap tt :tabnew<enter>
@@ -23,7 +23,6 @@ noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
 noremap r <C-R>
 noremap W <C-W>
-noremap X ZZ
 noremap U :call Sudo()<enter>
 noremap V <C-V>
 noremap <BS> <C-O>
