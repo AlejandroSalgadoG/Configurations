@@ -1,3 +1,3 @@
 function! OctaveC()
-    exe '!octave %'
+    exe "!octave % ".g:args
 endfunction

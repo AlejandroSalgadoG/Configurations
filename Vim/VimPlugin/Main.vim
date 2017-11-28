@@ -3,6 +3,9 @@ let indent="false"
 let mouse="true"
 let extension=expand('%:e')
 
+let cmd="./"
+let args=""
+
 noremap <F2> gq<left>
 noremap <F3> :noh<enter>
 noremap cc :call Column()<enter>

@@ -1,3 +1,3 @@
 function! BashC()
-    exe '!bash %'
+    exe "!bash % ".g:args
 endfunction

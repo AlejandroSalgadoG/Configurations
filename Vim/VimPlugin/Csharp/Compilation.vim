@@ -9,7 +9,7 @@ function! Gmcs()
             endif
         endfor
 
-        exe "!./".name
+        exe "!".g:cmd.name." ".g:args
     else
         exe "normal tt"
         call MakeCsharpHead(name)
