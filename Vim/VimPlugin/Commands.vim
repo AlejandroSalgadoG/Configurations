@@ -15,7 +15,7 @@ noremap <F4> :call Ghc()<enter>
 noremap <F5> :call LatexBib()<enter>
 noremap <F6> :call Latex()<enter>
 noremap <F7> :call LatexDiap()<enter>
-noremap U r
+noremap r <C-R>
 noremap W ww
 
 
