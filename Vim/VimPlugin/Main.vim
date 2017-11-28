@@ -18,6 +18,7 @@ noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
 noremap r <C-R>
 noremap W <C-W>
+noremap X ZZ
 noremap U :call Sudo()<enter>
 noremap V <C-V>
 noremap <BS> <C-O>
