@@ -88,6 +88,8 @@ function! Print()
         :call PrintJava()
     elseif g:extension == "cs"
         :call PrintCsharp()
+    elseif g:extension == "asm"
+        :call PrintAsm()
     endif
 endfunction
 

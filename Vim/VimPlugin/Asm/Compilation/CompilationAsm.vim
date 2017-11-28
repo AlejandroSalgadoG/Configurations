@@ -18,9 +18,9 @@ endfunction
 function! MakeAsmHead(name)
     :call Make()
     exe "normal i".a:name.": ".a:name.".o\n
-        \\tld ".a:name.".o -o ".a:name."\n\n"
+        \\tld -m elf32_x86_64 ".a:name.".o -o ".a:name."\n\n"
         \.a:name.".o: ".a:name.".asm\n
-        \\tnasm -f elf64 ".a:name.".asm"
+        \\tnasm -f elfx32 ".a:name.".asm"
 endfunction
 
 function! MakeAsmClean(name)
