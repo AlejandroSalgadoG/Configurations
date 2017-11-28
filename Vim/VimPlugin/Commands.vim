@@ -4,7 +4,7 @@ let mouse="true"
 
 noremap H :map<enter>
 noremap cc :call Column()<enter>
-noremap I :call Indent()<enter>
+noremap E :call Indent()<enter>
 noremap tt :tabnew<enter>
 noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
@@ -16,41 +16,59 @@ noremap <F5> :call LatexBib()<enter>
 noremap <F6> :call Latex()<enter>
 noremap <F7> :call LatexDiap()<enter>
 noremap r <C-R>
-noremap W ww
+noremap W <C-W>
+noremap V <C-V>
+noremap <BS> <C-O>
 
 au BufNewFile *.C :call Cpp()
 au BufNewFile *.h :call Hpp()
 au BufNewFile *.java :call Java()
 au BufNewFile *.hs :call Haskell()
-au BufNewFile Makefile :call MakeClean()
 au BufRead Makefile set noexpandtab
-
-function! Pbs(from, to)
-    exe a:from.",".a:to."d"
-endfunction
-
-function! Gcc()
-    let name=expand('%:r')
-    if filereadable("Makefile")
-        exe "!make"
-        exe "!./".name
-    else
-        set noexpandtab
-        set nocindent
-        exe "normal tt"
-        call MakeCppHead(name)
-        call MakeClean()
-        write Makefile
-        quit
-        call Gcc()
-    endif
-endfunction
 
 function! Cpp()
     exe "normal i#include <iostream>\n\n
         \using namespace std;\n\n
         \int main(int argc, char *argv[]){\n\n
         \}"
+    exe "normal k"
+    exe "normal i\t"
+endfunction
+
+function! Gcc()
+    let name=expand('%:r')
+    if filereadable("Makefile")
+        make
+        make exe
+    else
+        exe "normal tt"
+        call MakeCppHead(name)
+        call MakeCppClean()
+        call MakeCppExe(name)
+	    exe "normal gg"
+        write Makefile
+        quit
+        call Gcc()
+    endif
+endfunction
+
+function! MakeCppHead(name)
+    set noexpandtab
+    set nocindent
+    exe "normal i".a:name.": ".a:name.".o\n
+        \\tg++ ".a:name.".o -o ".a:name."\n\n"
+        \.a:name.".o: ".a:name.".C\n
+        \\tg++ -c ".a:name.".C"
+endfunction
+
+function! MakeCppClean()
+    set noexpandtab
+    set nocindent
+    exe "normal o\nclean:\n\trm -f *.o"
+endfunction
+
+function! MakeCppExe(name)
+    exe "normal o\nexe:\n\t./".a:name
 endfunction
 
 function! Hpp()
@@ -65,44 +83,50 @@ function! Hpp()
     exe "normal 2j"
 endfunction
 
-function! MakeCppHead(name)
-    exe "normal i".a:name.": ".a:name.".o\n
-        \\tg++ ".a:name.".o -o ".a:name."\n\n"
-        \.a:name.".o: ".a:name.".C\n
-        \\tg++ -c ".a:name.".C"
+function! Java()
+    let name=expand('%:r')
+    exe "normal ipublic class ".name."{\n\n
+        \public ".name."(){\n\n}\n\n
+        \public static void main(String[] args){\n
+        \".name tolower(name)." = new ".name."();\n
+        \}\n
+        \}"
 endfunction
 
-function! MakeClean()
-    exe "normal o\nclean:\n\trm -f *.o"
-	exe "normal gg"
+function! Javac(...)
+    let name=expand('%:r')
+    if filereadable("Makefile")
+        make
+        make exe
+    else
+        exe "normal tt"
+        call MakeJavaHead(name)
+        call MakeJavaClean()
+        call MakeJavaExe(name)
+	    exe "normal gg"
+        write Makefile
+        quit
+        call Javac()
+    endif
 endfunction
 
-function! LatexDiap()
-    exe "!pdflatex ".expand('%').";
-        \ if [ $? -eq 0 ]; then
-        \     gnome-open ".expand('%:r').".pdf;
-        \ fi"
-    exe "!rm -f *.nav *.out *.snm *.toc *.aux *.log"
+function! MakeJavaHead(name)
+    set noexpandtab
+    set nocindent
+    exe "normal i".a:name.".class: ".a:name.".java\n
+        \\tjavac ".a:name.".java\n"
 endfunction
 
-function! Latex()
-    exe "!pdflatex ".expand('%').";
-        \ if [ $? -eq 0 ]; then
-        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log;
-        \     gnome-open ".expand('%:r').".pdf;
-        \ fi"
+function! MakeJavaClean()
+    exe "normal o\nclean:\n\trm -f *.class"
 endfunction
 
-function! LatexBib()
-    exe "!latex ".expand('%').";
-        \ if [ $? -eq 0 ]; then
-        \     bibtex ".expand('%:r').".aux;
-        \     latex ".expand('%').";
-        \     latex ".expand('%').";
-        \     pdflatex ".expand('%').";
-        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log;
-        \     gnome-open ".expand('%:r').".pdf;
-        \ fi"
+function! MakeJavaExe(name)
+    exe "normal o\nexe:\n\tjava ".a:name
+endfunction
+
+function! Haskell()
+    exe "normal imain = print()"
 endfunction
 
 function! Ghc(...)
@@ -110,14 +134,6 @@ function! Ghc(...)
     exe "!if [ $? -eq 0 ]; then
         \   ./".expand('%:r')." ".join(a:000)";
         \   rm -f *hi *.o ".expand('%:r').";
-        \ fi"
-endfunction
-
-function! Javac(...)
-    echom system("javac ".expand('%'))
-    exe "!if [ $? -eq 0 ]; then
-        \   java ".expand('%:r')." ".join(a:000)";
-        \   rm -f *class;
         \ fi"
 endfunction
 
@@ -171,16 +187,30 @@ function! Column()
     endif
 endfunction
 
-function! Java()
-    let name=expand('%:r')
-    exe "normal ipublic class ".name."{\n\n
-        \public ".name."(){\n\n}\n\n
-        \public static void main(String[] args){\n
-        \".name tolower(name)." = new ".name."();\n
-        \}\n
-        \}"
+function! LatexDiap()
+    exe "!pdflatex ".expand('%').";
+        \ if [ $? -eq 0 ]; then
+        \     gnome-open ".expand('%:r').".pdf;
+        \ fi"
+    exe "!rm -f *.nav *.out *.snm *.toc *.aux *.log"
 endfunction
 
-function! Haskell()
-    exe "normal imain = print()"
+function! Latex()
+    exe "!pdflatex ".expand('%').";
+        \ if [ $? -eq 0 ]; then
+        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log;
+        \     gnome-open ".expand('%:r').".pdf;
+        \ fi"
+endfunction
+
+function! LatexBib()
+    exe "!latex ".expand('%').";
+        \ if [ $? -eq 0 ]; then
+        \     bibtex ".expand('%:r').".aux;
+        \     latex ".expand('%').";
+        \     latex ".expand('%').";
+        \     pdflatex ".expand('%').";
+        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log;
+        \     gnome-open ".expand('%:r').".pdf;
+        \ fi"
 endfunction
