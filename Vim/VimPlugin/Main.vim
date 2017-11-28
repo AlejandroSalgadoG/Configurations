@@ -12,7 +12,7 @@ let mkargs=""
 noremap <F2> :let args=""<left>
 noremap <F3> :let cmd=""<left>
 noremap <F4> :let mkargs=""<left>
-noremap m :call MakeThis()<enter>
+noremap K :call MakeThis()<enter>
 noremap J gq<left>
 noremap L :noh<enter>
 noremap tt :tabnew<enter>
