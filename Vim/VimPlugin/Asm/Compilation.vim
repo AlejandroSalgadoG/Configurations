@@ -1,15 +1,14 @@
 function! Nasm()
-    let name=expand('%:r')
     if filereadable("Makefile")
         
         exe "!make ".g:mkargs
 
-        exe "!".g:cmd.name." ".g:args
+        exe "!".g:cmd.g:name." ".g:args
     else
         exe "normal tt"
-        call MakeAsmHead(name)
-        call MakeAsmClean(name)
-        call MakeAsmExe(name)
+        call MakeAsmHead()
+        call MakeAsmClean()
+        call MakeAsmExe()
         exe "normal gg"
         write Makefile
         quit
@@ -17,19 +16,19 @@ function! Nasm()
     endif
 endfunction
 
-function! MakeAsmHead(name)
+function! MakeAsmHead()
     :call Make()
-    exe "normal i".a:name.": ".a:name.".o\n
-        \\tld -m elf32_x86_64 ".a:name.".o -o ".a:name."\n\n"
-        \.a:name.".o: ".a:name.".asm\n
-        \\tnasm -f elfx32 ".a:name.".asm"
+    exe "normal i".g:name.": ".g:name.".o\n
+        \\tld -m elf32_x86_64 ".g:name.".o -o ".g:name."\n\n"
+        \.g:name.".o: ".g:name.".asm\n
+        \\tnasm -f elfx32 ".g:name.".asm"
 endfunction
 
-function! MakeAsmClean(name)
+function! MakeAsmClean()
     :call Make()
-    exe "normal o\nclean:\n\trm -f *.o ".a:name
+    exe "normal o\nclean:\n\trm -f *.o ".g:name
 endfunction
 
-function! MakeAsmExe(name)
-    exe "normal o\nexe:\n\t./".a:name
+function! MakeAsmExe()
+    exe "normal o\nexe:\n\t./".g:name
 endfunction

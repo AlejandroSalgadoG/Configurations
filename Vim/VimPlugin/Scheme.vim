@@ -26,3 +26,6 @@ hi texCmdName ctermfg=Yellow
 hi texSection ctermfg=White
 hi Special cterm=NONE ctermfg=3
 hi texStatement cterm=NONE ctermfg=7
+hi DiffChange cterm=NONE ctermbg=4 ctermfg=7
+hi DiffText ctermfg=3
+hi DiffDelete ctermbg=1 ctermfg=0

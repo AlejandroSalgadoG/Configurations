@@ -3,6 +3,7 @@ let indent="false"
 let mouse="true"
 let makeThis="false"
 let extension=expand('%:e')
+let name=expand('%:r')
 
 let cmd="./"
 let args=""

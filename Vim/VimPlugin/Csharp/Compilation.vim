@@ -1,5 +1,4 @@
 function! Gmcs()
-    let name=expand('%:r')
     if filereadable("Makefile")
         exe "!make ".g:mkargs
 
@@ -9,12 +8,12 @@ function! Gmcs()
             endif
         endfor
 
-        exe "!".g:cmd.name." ".g:args
+        exe "!".g:cmd.g:name." ".g:args
     else
         exe "normal tt"
-        call MakeCsharpHead(name)
-        call MakeCsharpClean(name)
-        call MakeCsharpExe(name)
+        call MakeCsharpHead()
+        call MakeCsharpClean()
+        call MakeCsharpExe()
         exe "normal gg"
         write Makefile
         quit
@@ -22,16 +21,16 @@ function! Gmcs()
     endif
 endfunction
 
-function! MakeCsharpHead(name)
+function! MakeCsharpHead()
     :call Make()
-    exe "normal i".a:name.": "a:name.".cs\n
-        \\tgmcs -out:".a:name." ".a:name.".cs\n\n"
+    exe "normal i".g:name.": "g:name.".cs\n
+        \\tgmcs -out:".g:name." ".g:name.".cs\n\n"
 endfunction
 
-function! MakeCsharpClean(name)
-    exe "normal o\nclean:\n\trm -f *.dll ".a:name
+function! MakeCsharpClean()
+    exe "normal o\nclean:\n\trm -f *.dll ".g:name
 endfunction
 
-function! MakeCsharpExe(name)
-    exe "normal o\nexe:\n\t./".a:name
+function! MakeCsharpExe()
+    exe "normal o\nexe:\n\t./".g:name
 endfunction

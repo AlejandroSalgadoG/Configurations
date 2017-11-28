@@ -1,5 +1,4 @@
 function! Javac()
-    let name=expand('%:r')
     if filereadable("Makefile")
         exe "!make ".g:mkargs
 
@@ -9,12 +8,12 @@ function! Javac()
             endif
         endfor
 
-        exe "!".g:cmd.name." ".g:args
+        exe "!".g:cmd.g:name." ".g:args
     else
         exe "normal tt"
-        call MakeJavaHead(name)
-        call MakeJavaClean(name)
-        call MakeJavaExe(name)
+        call MakeJavaHead()
+        call MakeJavaClean()
+        call MakeJavaExe()
         exe "normal gg"
         write Makefile
         quit
@@ -22,16 +21,16 @@ function! Javac()
     endif
 endfunction
 
-function! MakeJavaHead(name)
+function! MakeJavaHead()
     :call Make()
-    exe "normal i".a:name.".class: ".a:name.".java\n
-        \\tjavac ".a:name.".java\n"
+    exe "normal i".g:name.".class: ".g:name.".java\n
+        \\tjavac ".g:name.".java\n"
 endfunction
 
-function! MakeJavaClean(name)
+function! MakeJavaClean()
     exe "normal o\nclean:\n\trm -f *.class "
 endfunction
 
-function! MakeJavaExe(name)
-    exe "normal o\nexe:\n\tjava ".a:name
+function! MakeJavaExe()
+    exe "normal o\nexe:\n\tjava ".g:name
 endfunction

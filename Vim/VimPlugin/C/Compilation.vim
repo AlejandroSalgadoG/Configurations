@@ -1,14 +1,13 @@
 function! Gcc()
-    let name=expand('%:r')
     if filereadable("Makefile")
         exe "!make ".g:mkargs
 
-        exe "!".g:cmd.name." ".g:args
+        exe "!".g:cmd.g:name." ".g:args
     else
         exe "normal tt"
-        call MakeCHead(name)
-        call MakeCClean(name)
-        call MakeCExe(name)
+        call MakeCHead()
+        call MakeCClean()
+        call MakeCExe()
         exe "normal gg"
         write Makefile
         quit
@@ -16,19 +15,19 @@ function! Gcc()
     endif
 endfunction
 
-function! MakeCHead(name)
+function! MakeCHead()
     :call Make()
-    exe "normal i".a:name.": ".a:name.".o\n
-        \\tgcc ".a:name.".o -o ".a:name."\n\n"
-        \.a:name.".o: ".a:name.".c\n
-        \\tgcc -c ".a:name.".c"
+    exe "normal i".g:name.": ".g:name.".o\n
+        \\tgcc ".g:name.".o -o ".g:name."\n\n"
+        \.g:name.".o: ".g:name.".c\n
+        \\tgcc -c ".g:name.".c"
 endfunction
 
-function! MakeCClean(name)
+function! MakeCClean()
     :call Make()
-    exe "normal o\nclean:\n\trm -f *.o ".a:name
+    exe "normal o\nclean:\n\trm -f *.o ".g:name
 endfunction
 
-function! MakeCExe(name)
-    exe "normal o\nexe:\n\t./".a:name
+function! MakeCExe()
+    exe "normal o\nexe:\n\t./".g:name
 endfunction

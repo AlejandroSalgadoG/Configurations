@@ -1,14 +1,13 @@
 function! Gpp()
-    let name=expand('%:r')
     if filereadable("Makefile")
         exe "!make ".g:mkargs
 
-        exe "!".g:cmd.name." ".g:args
+        exe "!".g:cmd.g:name." ".g:args
     else
         exe "normal tt"
-        call MakeCppHead(name)
-        call MakeCppClean(name)
-        call MakeCppExe(name)
+        call MakeCppHead()
+        call MakeCppClean()
+        call MakeCppExe()
         exe "normal gg"
         write Makefile
         quit
@@ -16,19 +15,19 @@ function! Gpp()
     endif
 endfunction
 
-function! MakeCppHead(name)
+function! MakeCppHead()
     :call Make()
-    exe "normal i".a:name.": ".a:name.".o\n
-        \\tg++ ".a:name.".o -o ".a:name."\n\n"
-        \.a:name.".o: ".a:name.".".g:extension."\n
-        \\tg++ -c ".a:name.".".g:extension
+    exe "normal i".g:name.": ".g:name.".o\n
+        \\tg++ ".g:name.".o -o ".g:name."\n\n"
+        \.g:name.".o: ".g:name.".".g:extension."\n
+        \\tg++ -c ".g:name.".".g:extension
 endfunction
 
-function! MakeCppClean(name)
+function! MakeCppClean()
     :call Make()
-    exe "normal o\nclean:\n\trm -f *.o ".a:name
+    exe "normal o\nclean:\n\trm -f *.o ".g:name
 endfunction
 
-function! MakeCppExe(name)
-    exe "normal o\nexe:\n\t./".a:name
+function! MakeCppExe()
+    exe "normal o\nexe:\n\t./".g:name
 endfunction
