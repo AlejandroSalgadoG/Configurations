@@ -2,7 +2,15 @@ function! PdfLatex()
     let name=expand('%:r')
     if filereadable("Makefile")
         make
-        exe "!gnome-open ".name.".pdf"
+
+        for output in getqflist()
+            if output.valid == "1"
+                return
+            endif
+        endfor
+
+        exe "!mupdf ".name.".pdf"
+
     elseif filereadable(name.".bib")
     echom "Bib"
         exe "normal tt"

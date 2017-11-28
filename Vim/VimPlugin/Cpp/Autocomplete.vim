@@ -1,5 +1,5 @@
-au BufNewFile *.C :call Cpp()
-au BufNewFile *.h :call Hpp()
+au BufNewFile *.C call Cpp()
+au BufNewFile *.h call Hpp()
 
 function! Cpp()
     exe "normal i#include <iostream>\n\n

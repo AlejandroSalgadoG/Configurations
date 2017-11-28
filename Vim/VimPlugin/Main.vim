@@ -3,6 +3,7 @@ let indent="false"
 let mouse="true"
 let extension=expand('%:e')
 
+noremap <F2> :%s/.\{80}/&\r/g<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
 noremap E :call Indent()<enter>
@@ -87,7 +88,7 @@ endfunction
 
 function! Run()
 
-    if g:extension == "C" || g:extension == "h"
+    if g:extension == "C" || g:extension == "cpp"
         :call Gpp()
     elseif g:extension == "c"
         :call Gcc()

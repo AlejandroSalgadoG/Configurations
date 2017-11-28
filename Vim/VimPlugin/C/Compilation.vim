@@ -2,7 +2,14 @@ function! Gcc()
     let name=expand('%:r')
     if filereadable("Makefile")
         make
-        make exe
+
+        for output in getqflist()
+            if output.valid == "1"
+                return
+            endif
+        endfor
+
+        exe "!./".name
     else
         exe "normal tt"
         call MakeCHead(name)
