@@ -3,9 +3,7 @@ let indent="false"
 let mouse="true"
 let extension=expand('%:e')
 
-noremap <F2> gq<left>
-noremap <F3> :noh<enter>
-noremap cc :call Column()<enter>
+noremap <F2> :%s/.\{80}/&\r/g<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
 noremap E :call Indent()<enter>
@@ -66,21 +64,6 @@ function! Load(program)
         exe "so ".compile
     else
         exe "so ".interpret
-    endif
-
-endfunction
-
-function! Column()
-    if g:column == "false"
-        highlight OverLength ctermbg=red
-        match OverLength /\%81v.\+/
-                                    " \%81v from 81 character
-                                    " . any character
-                                    " \+ more than one
-        let g:column="true"
-    else
-        highlight OverLength cterm=NONE ctermbg=black
-        let g:column="false"
     endif
 
 endfunction
