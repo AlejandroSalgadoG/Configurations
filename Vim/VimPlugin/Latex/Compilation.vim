@@ -4,8 +4,6 @@ function! PdfLatex()
         if v:shell_error
             return
         endif
-        exe "!".g:cmd.expand('%:r').".pdf "
-
     else
         if filereadable(expand('%:r').".bib")
             exe "normal tt"
@@ -37,7 +35,7 @@ endfunction
 
 function! MakeLatexExe()
     exe "normal o\nexe:\n
-        \\tmupdf ".g:name.".pdf"
+        \\tevince ".g:name.".pdf &"
 endfunction
 
 function! MakeLatexBibHead()
