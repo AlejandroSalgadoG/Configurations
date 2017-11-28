@@ -1,3 +1,3 @@
 function! PythonC()
-    exe "!python % ".g:args
+    exe "!".g:cmd.expand('%')." ".g:args
 endfunction
