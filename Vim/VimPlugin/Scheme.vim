@@ -23,5 +23,5 @@ hi Statement ctermfg=Magenta cterm=NONE
 
 hi texCmdName ctermfg=Yellow
 hi texSection ctermfg=White
-hi Special ctermfg=Blue
-hi texStatement ctermfg=Blue
+hi Special cterm=NONE ctermfg=3
+hi texStatement cterm=NONE ctermfg=7
