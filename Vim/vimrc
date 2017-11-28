@@ -4,8 +4,6 @@ set cindent " indent
 set wildmenu " Menu for auto completation
 set cursorline " Line over the current position
 set autoread " Automatically update the files if an external change occurs
-set tabstop=4 " set tab as 4 spaces
-set expandtab " take tabs as spaces
 
 " indentation with 4 spaces
 set tabstop=4

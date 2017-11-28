@@ -46,6 +46,8 @@ function Start()
         call Load("Bash")
     elseif g:extension == "m"
         call Load("Octave")
+    elseif g:extension == "py"
+        call Load("Python")
     elseif g:extension == "java"
         call Load("Java")
     elseif g:extension == "cs"
@@ -91,6 +93,8 @@ function! Print()
         :call PrintC()
     elseif g:extension == "m"
         :call PrintOctave()
+    elseif g:extension == "py"
+        :call PrintPython()
     elseif g:extension == "java"
         :call PrintJava()
     elseif g:extension == "cs"
@@ -110,6 +114,8 @@ function! Run()
         :call BashC()
     elseif g:extension == "m"
         :call OctaveC()
+    elseif g:extension == "py"
+        :call PythonC()
     elseif g:extension == "java"
         :call Javac()
     elseif g:extension == "cs"
