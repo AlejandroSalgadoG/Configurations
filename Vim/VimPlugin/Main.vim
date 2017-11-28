@@ -39,6 +39,8 @@ function Start()
         call Load("Latex")
     elseif g:extension == "hs"
         call Load("Haskell")
+    elseif g:extension == "asm"
+        call Load("Asm")
     endif
 endfunction
 
@@ -112,6 +114,8 @@ function! Compile()
         :call Ghc()
     elseif g:extension == "tex"
         :call PdfLatex()
+    elseif g:extension == "asm"
+        :call Nasm()
     endif
 endfunction
 
