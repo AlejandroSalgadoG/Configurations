@@ -1,5 +1,6 @@
 au BufNewFile *.tex :call Latex()
 
+let cmd="mupdf "
 noremap T :call Itemize()<enter>
 
 function! Latex()

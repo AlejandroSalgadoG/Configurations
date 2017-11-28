@@ -4,7 +4,7 @@ function! PdfLatex()
         if v:shell_error
             return
         endif
-        exe "!".g:cmd.expand('%:r')." ".g:args
+        exe "!".g:cmd.expand('%:r').".pdf "
 
     elseif filereadable(g:name.".bib")
         echom "Bib"
