@@ -2,6 +2,7 @@ let column="false"
 let indent="false"
 let mouse="true"
 
+
 noremap cc :call Column()<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
@@ -14,17 +15,15 @@ noremap V <C-V>
 noremap <BS> <C-O>
 noremap <space> :call Clean()<enter>
 noremap <bar> :call Compile()<enter>
-noremap <F2> :call LatexBib()<enter>
-noremap <F3> :call Latex()<enter>
-noremap <F4> :call LatexDiap()<enter>
 
 au BufNewFile Makefile :call Make()
 au BufRead Makefile :call Make()
-au BufNewFile *.C :call Cpp()
-au BufNewFile *.h :call Hpp()
-au BufNewFile *.java :call Java()
-au BufNewFile *.cs :call Csharp()
-au BufNewFile *.hs :call Haskell()
+
+so ~/Github/Vim/VimPlugin/Cpp/Autocomplete/AutocompleteCpp.vim
+so ~/Github/Vim/VimPlugin/Java/Autocomplete/AutocompleteJava.vim
+so ~/Github/Vim/VimPlugin/Latex/Autocomplete/AutocompleteLatex.vim
+so ~/Github/Vim/VimPlugin/Csharp/Autocomplete/AutocompleteCsharp.vim
+so ~/Github/Vim/VimPlugin/Haskell/Autocomplete/AutocompleteHaskell.vim
 
 function! Make()
     set noexpandtab
@@ -106,6 +105,8 @@ function! Compile()
         :call Gmcs()
     elseif extension == "hs"
         :call Ghc()
+    elseif extension == "tex"
+        :call PdfLatex()
     endif
 endfunction
 
@@ -213,71 +214,68 @@ function! Ghc(...)
         \ fi"
 endfunction
 
-function! Cpp()
-    exe "normal i#include <iostream>\n\n
-        \using namespace std;\n\n
-        \int main(int argc, char *argv[]){\n\n
-        \}"
-    exe "normal k"
-    exe "normal i\t"
-endfunction
-
-function! Hpp()
-    exe "normal i#pragma once"
-    exe "normal o"
-endfunction
-
-function! Java()
+function! PdfLatex()
     let name=expand('%:r')
-    exe "normal ipublic class ".name."{\n\n
-        \public ".name."(){\n\n}\n\n
-        \public static void main(String[] args){\n\n
-        \}\n
-        \}"
-    exe "normal gg"
-    exe "normal w"
+    if filereadable("Makefile")
+        make
+        make cleanstandar
+        exe "!gnome-open ".name.".pdf"
+    elseif filereadable(name.".bib")
+    echom "Bib"
+        exe "normal tt"
+        call MakeLatexBibHead(name)
+        call MakeLatexBibClean(name)
+        call MakeLatexExe(name)
+	    exe "normal gg"
+        write Makefile
+        quit
+        call PdfLatex()
+    else
+        exe "normal tt"
+        call MakeLatexHead(name)
+        call MakeLatexClean(name)
+        call MakeLatexExe(name)
+	    exe "normal gg"
+        write Makefile
+        quit
+        call PdfLatex()
+    endif
 endfunction
 
-function! Csharp()
-    let name=expand('%:r')
-    exe "normal iusing System;\n"
-    exe "normal opublic class ".name."{\n\n
-        \public static void Main(string[] args){
-        \\n\n
-        \}\n\n
-        \}"
-    exe "normal 3k"
-    exe "normal i\t\t"
+function! MakeLatexHead(name)
+    :call Make()
+    exe "normal i".a:name.".pdf: "a:name.".tex\n
+        \\tpdflatex ".a:name.".tex"
 endfunction
 
-function! Haskell()
-    exe "normal imain = print()"
+function! MakeLatexClean(name)
+    exe "normal o\ncleanstandar:\n
+        \\trm -f *.nav *.snm *.toc *.out *.dvi *.blg *.bbl *.aux *.log"
+
+    exe "normal o\nclean:\n
+        \\trm -f *.nav *.snm *.toc* .out *.dvi *.blg *.bbl *.aux *.log
+        \ ".a:name.".pdf"
 endfunction
 
-function! LatexDiap()
-    exe "!pdflatex ".expand('%').";
-        \ if [ $? -eq 0 ]; then
-        \     gnome-open ".expand('%:r').".pdf;
-        \ fi"
-    exe "!rm -f *.nav *.out *.snm *.toc *.aux *.log"
+function! MakeLatexExe(name)
+    exe "normal o\nexe:\n
+        \\tgnome-open ".a:name.".pdf"
 endfunction
 
-function! Latex()
-    exe "!pdflatex ".expand('%').";
-        \ if [ $? -eq 0 ]; then
-        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log;
-        \     gnome-open ".expand('%:r').".pdf;
-        \ fi"
+function! MakeLatexBibHead(name)
+    :call Make()
+    exe "normal i".a:name.".pdf: ".a:name.".tex ".a:name.".bib\n
+        \\tlatex ".a:name.".tex\n
+        \\tbibtex ".a:name.".aux\n
+        \\tlatex ".a:name.".tex\n
+        \\tlatex ".a:name.".tex\n
+        \\tpdflatex ".a:name.".tex"
 endfunction
 
-function! LatexBib()
-    exe "!latex ".expand('%').";
-        \ if [ $? -eq 0 ]; then
-        \     bibtex ".expand('%:r').".aux;
-        \     latex ".expand('%').";
-        \     latex ".expand('%').";
-        \     pdflatex ".expand('%').";
-        \     rm -f *.out *.dvi *.blg *.bbl *.aux *.log *.vrb;
-        \     gnome-open ".expand('%:r').".pdf;
-        \ fi"
+function! MakeLatexBibClean(name)
+    exe "normal o\ncleanstandar:\n
+        \\trm -f *.out *.dvi *.blg *.bbl *.aux *.log *.vrb"
+
+    exe "normal o\nclean:\n
+        \\trm -f *.out *.dvi *.blg *.bbl *.aux *.log *.vrb ".a:name.".pdf"
 endfunction
