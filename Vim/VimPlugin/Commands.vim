@@ -1,11 +1,13 @@
 let column="false"
 let indent="false"
+let mouse="true"
 
-noremap h :map<enter>
-noremap cc :call Column()<enter>
+noremap H :map<enter>
+noremap C :call Column()<enter>
 noremap I :call Indent()<enter>
-noremap tt :tabnew<enter>
+noremap T :tabnew<enter>
 noremap S :call Print()<enter>
+noremap M :call Mouse()<enter>
 noremap <space> :call Clean()<enter>
 noremap <F2> :call Javac()<enter>
 noremap <F3> :call Gcc()<enter>
@@ -13,7 +15,7 @@ noremap <F4> :call Ghc()<enter>
 noremap <F5> :call LatexBib()<enter>
 noremap <F6> :call Latex()<enter>
 noremap <F7> :call LatexDiap()<enter>
-noremap r <C-R>
+noremap U <C-R>
 noremap W <C-W>
 
 
@@ -31,7 +33,7 @@ function! Gcc()
     else
         set noexpandtab
         set nocindent
-        exe "normal tt"
+        exe "normal T"
         call MakeCppHead(name)
         call MakeClean()
         write Makefile
@@ -127,6 +129,18 @@ function! Indent()
         set nocindent
         echom "Indent disabled"
         let g:indent="true"
+    endif
+endfunction
+
+function! Mouse()
+    if g:mouse == "true"
+        set mouse=r
+        echom "Mouse disabled"
+        let g:mouse="false"
+    else
+        set mouse=a
+        echom "Mouse enabled"
+        let g:mouse="true"
     endif
 endfunction
 
