@@ -30,7 +30,7 @@ endfunction
 function! MakeLatexClean()
     exe "normal o\nclean:\n
         \\trm -f ".g:name.".pdf\n
-        \\trm -f *.nav *.snm *.toc* .out *.dvi *.blg *.bbl *.aux *.log"
+        \\trm -f *.nav *.snm *.toc *.out *.dvi *.blg *.bbl *.aux *.log"
 endfunction
 
 function! MakeLatexExe()
