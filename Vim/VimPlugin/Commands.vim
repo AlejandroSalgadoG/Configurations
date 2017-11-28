@@ -9,12 +9,10 @@ noremap tt :tabnew<enter>
 noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
 noremap <space> :call Clean()<enter>
-noremap <F2> :call Javac()<enter>
-noremap <F3> :call Gcc()<enter>
-noremap <F4> :call Ghc()<enter>
-noremap <F5> :call LatexBib()<enter>
-noremap <F6> :call Latex()<enter>
-noremap <F7> :call LatexDiap()<enter>
+noremap <bar> :call Compile()<enter>
+noremap <F2> :call LatexBib()<enter>
+noremap <F3> :call Latex()<enter>
+noremap <F4> :call LatexDiap()<enter>
 noremap r <C-R>
 noremap W <C-W>
 noremap V <C-V>
@@ -23,8 +21,22 @@ noremap <BS> <C-O>
 au BufNewFile *.C :call Cpp()
 au BufNewFile *.h :call Hpp()
 au BufNewFile *.java :call Java()
+au BufNewFile *.cs :call Csharp()
 au BufNewFile *.hs :call Haskell()
 au BufRead Makefile set noexpandtab
+
+function! Compile()
+    let extension=expand('%:e')
+    if extension == "C"
+        :call Gpp()
+    elseif extension == "java"
+        :call Javac()
+    elseif extension == "cs"
+        :call Gmcs()
+    elseif extension == "hs"
+        :call Ghc()
+    endif
+endfunction
 
 function! Cpp()
     exe "normal i#include <iostream>\n\n
@@ -35,7 +47,7 @@ function! Cpp()
     exe "normal i\t"
 endfunction
 
-function! Gcc()
+function! Gpp()
     let name=expand('%:r')
     if filereadable("Makefile")
         make
@@ -43,12 +55,12 @@ function! Gcc()
     else
         exe "normal tt"
         call MakeCppHead(name)
-        call MakeCppClean()
+        call MakeCppClean(name)
         call MakeCppExe(name)
 	    exe "normal gg"
         write Makefile
         quit
-        call Gcc()
+        call Gpp()
     endif
 endfunction
 
@@ -61,10 +73,10 @@ function! MakeCppHead(name)
         \\tg++ -c ".a:name.".C"
 endfunction
 
-function! MakeCppClean()
+function! MakeCppClean(name)
     set noexpandtab
     set nocindent
-    exe "normal o\nclean:\n\trm -f *.o"
+    exe "normal o\nclean:\n\trm -f *.o ".a:name
 endfunction
 
 function! MakeCppExe(name)
@@ -87,10 +99,11 @@ function! Java()
     let name=expand('%:r')
     exe "normal ipublic class ".name."{\n\n
         \public ".name."(){\n\n}\n\n
-        \public static void main(String[] args){\n
-        \".name tolower(name)." = new ".name."();\n
+        \public static void main(String[] args){\n\n
         \}\n
         \}"
+    exe "normal gg"
+    exe "normal w"
 endfunction
 
 function! Javac(...)
@@ -101,7 +114,7 @@ function! Javac(...)
     else
         exe "normal tt"
         call MakeJavaHead(name)
-        call MakeJavaClean()
+        call MakeJavaClean(name)
         call MakeJavaExe(name)
 	    exe "normal gg"
         write Makefile
@@ -117,12 +130,56 @@ function! MakeJavaHead(name)
         \\tjavac ".a:name.".java\n"
 endfunction
 
-function! MakeJavaClean()
-    exe "normal o\nclean:\n\trm -f *.class"
+function! MakeJavaClean(name)
+    exe "normal o\nclean:\n\trm -f *.class ".a:name
 endfunction
 
 function! MakeJavaExe(name)
     exe "normal o\nexe:\n\tjava ".a:name
+endfunction
+
+function! Csharp()
+    let name=expand('%:r')
+    exe "normal iusing System;\n"
+    exe "normal opublic class ".name."{\n\n
+        \public static void Main(string[] args){
+        \\n\n
+        \}\n\n
+        \}"
+    exe "normal 3k"
+    exe "normal i\t\t"
+endfunction
+
+function! Gmcs()
+    let name=expand('%:r')
+    if filereadable("Makefile")
+        make
+        make exe
+    else
+        exe "normal tt"
+        call MakeCsharpHead(name)
+        call MakeCsharpClean(name)
+        call MakeCsharpExe(name)
+	    exe "normal gg"
+        write Makefile
+        quit
+        call Gmcs()
+    endif
+endfunction
+
+function! MakeCsharpHead(name)
+    set noexpandtab
+    set nocindent
+    exe "normal i".a:name.": "a:name.".cs\n
+        \\tgmcs -out:".a:name." ".a:name.".cs\n\n"
+endfunction
+
+function! MakeCsharpClean(name)
+    exe "normal o\nclean:\n\trm -f *.dll ".a:name
+endfunction
+
+function! MakeCsharpExe(name)
+    exe "normal o\nexe:\n\t./".a:name
 endfunction
 
 function! Haskell()
@@ -144,12 +201,27 @@ endfunction
 function! Print()
     let extension=expand('%:e')
     if extension == "C"
-        exe "normal ocout <<  << endl;"
-        exe "normal 8h"
+        :call PrintCpp()
     elseif extension == "java"
-        exe "normal oSystem.out.println();"
-        exe "normal 1h"
+        :call PrintJava()
+    elseif extension == "cs"
+        :call PrintCsharp()
     endif
+endfunction
+
+function! PrintCpp()
+    exe "normal ocout <<  << endl;"
+    exe "normal 8h"
+endfunction
+
+function! PrintJava()
+    exe "normal oSystem.out.println();"
+    exe "normal 1h"
+endfunction
+
+function! PrintCsharp()
+    exe "normal oConsole.WriteLine();"
+    exe "normal 1h"
 endfunction
 
 function! Indent()
