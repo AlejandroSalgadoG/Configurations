@@ -2,7 +2,6 @@ function! PdfLatex()
     let name=expand('%:r')
     if filereadable("Makefile")
         make
-        make cleanstandar
         exe "!gnome-open ".name.".pdf"
     elseif filereadable(name.".bib")
     echom "Bib"
@@ -17,7 +16,6 @@ function! PdfLatex()
     else
         exe "normal tt"
         call MakeLatexHead(name)
-        call MakeLatexClean(name)
         call MakeLatexExe(name)
         exe "normal gg"
         write Makefile
@@ -29,13 +27,11 @@ endfunction
 function! MakeLatexHead(name)
     :call Make()
     exe "normal i".a:name.".pdf: "a:name.".tex\n
-        \\tpdflatex ".a:name.".tex"
+        \\tpdflatex ".a:name.".tex\n
+        \\trm -f *.nav *.snm *.toc *.out *.dvi *.blg *.bbl *.aux *.log"
 endfunction
 
 function! MakeLatexClean(name)
-    exe "normal o\ncleanstandar:\n
-        \\trm -f *.nav *.snm *.toc *.out *.dvi *.blg *.bbl *.aux *.log"
-
     exe "normal o\nclean:\n
         \\trm -f *.nav *.snm *.toc* .out *.dvi *.blg *.bbl *.aux *.log
         \ ".a:name.".pdf"

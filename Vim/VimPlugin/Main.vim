@@ -122,7 +122,7 @@ function! Compile()
         :call Ghc()
     elseif g:extension == "tex"
         :call PdfLatex()
-    elseif g:extension == "asm"
+    elseif g:extension == "asm" || g:extension == "inc"
         :call Nasm()
     endif
 endfunction

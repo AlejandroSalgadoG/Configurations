@@ -16,7 +16,7 @@ function! Latex()
 endfunction
 
 function! Itemize()
-    exe "normal i\\begin{itemize}\n
-        \    \\item\n
-        \\\end{itemize}"
+    exe "normal o\\begin{itemize}\n
+        \\t\\item\n
+        \\b\\end{itemize}"
 endfunction
