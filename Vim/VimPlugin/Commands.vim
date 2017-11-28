@@ -1,10 +1,10 @@
 let column="false"
 let indent="false"
 
-noremap H :map<enter>
-noremap C :call Column()<enter>
+noremap h :map<enter>
+noremap cc :call Column()<enter>
 noremap I :call Indent()<enter>
-noremap T :tabnew<enter>
+noremap tt :tabnew<enter>
 noremap S :call Print()<enter>
 noremap <space> :call Clean()<enter>
 noremap <F2> :call Javac()<enter>
@@ -13,7 +13,7 @@ noremap <F4> :call Ghc()<enter>
 noremap <F5> :call LatexBib()<enter>
 noremap <F6> :call Latex()<enter>
 noremap <F7> :call LatexDiap()<enter>
-noremap U <C-R>
+noremap r <C-R>
 noremap W <C-W>
 
 
@@ -31,7 +31,7 @@ function! Gcc()
     else
         set noexpandtab
         set nocindent
-        exe "normal T"
+        exe "normal tt"
         call MakeCppHead(name)
         call MakeClean()
         write Makefile
