@@ -34,7 +34,7 @@ function! Make()
 endfunction
 
 function Start()
-    if g:extension == "C" || g:extension == "h"
+    if g:extension == "C" || g:extension == "cpp" || g:extension == "h"
         call Load("Cpp")
     elseif g:extension == "c"
         call Load("C")
@@ -94,7 +94,7 @@ endfunction
 
 function! Print()
 
-    if g:extension == "C"
+    if g:extension == "C" || g:extension == "cpp"
         :call PrintCpp()
     elseif g:extension == "c"
         :call PrintC()
@@ -111,7 +111,6 @@ function! Print()
 endfunction
 
 function! Run()
-
     if g:extension == "C" || g:extension == "cpp"
         :call Gpp()
     elseif g:extension == "c"

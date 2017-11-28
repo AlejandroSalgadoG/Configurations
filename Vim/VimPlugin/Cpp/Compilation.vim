@@ -26,8 +26,8 @@ function! MakeCppHead(name)
     :call Make()
     exe "normal i".a:name.": ".a:name.".o\n
         \\tg++ ".a:name.".o -o ".a:name."\n\n"
-        \.a:name.".o: ".a:name.".C\n
-        \\tg++ -c ".a:name.".C"
+        \.a:name.".o: ".a:name.".".g:extension."\n
+        \\tg++ -c ".a:name.".".g:extension
 endfunction
 
 function! MakeCppClean(name)

@@ -1,4 +1,5 @@
 au BufNewFile *.C call Cpp()
+au BufNewFile *.cpp call Cpp()
 au BufNewFile *.h call Hpp()
 
 function! Cpp()
