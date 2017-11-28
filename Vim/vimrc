@@ -8,8 +8,9 @@ set tabstop=4 " set tab as 4 spaces
 set expandtab " take tabs as spaces
 
 " indentation with 4 spaces
+set tabstop=4
 set shiftwidth=4
-set softtabstop=4
+set expandtab
 
 " Dont create extra file
 set noswapfile
@@ -25,6 +26,8 @@ match WhiteSpace /\s\+$/ " highlight the unwanted spaces
                          " \s whitespaces
                          " \+ match more than one
                          " $ until end of line
+
+match TabLine /\s\t/ " highlight tabs
 
 set colorcolumn=81
 highlight ColorColumn ctermbg=4

@@ -15,6 +15,7 @@ hi MatchParen cterm=underline ctermbg=White ctermfg=Black
 hi Error ctermbg=Blue ctermfg=White
 hi Statement ctermfg=Magenta
 hi WhiteSpace ctermbg=Red
+hi TabLine ctermbg=Red cterm=NONE
 hi MakeCommandError ctermbg=Black ctermfg=White
 hi Conditional ctermfg=Yellow term=bold
 hi Repeat ctermfg=Yellow term=bold

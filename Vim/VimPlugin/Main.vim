@@ -64,7 +64,7 @@ function! Load(program)
     let interpret=cmdPath.a:program."/Interpret.vim"
 
     if filereadable(auto)
-    	exe "so ".auto
+        exe "so ".auto
     endif
 
     if filereadable(print)
@@ -150,7 +150,8 @@ function! Mouse()
 endfunction
 
 function! Clean()
-    exe '%s/\s\+$//'
+    exe '%s/\s\+$//e'
+    exe '%s/\t/    /ge'
 endfunction
 
 function! Indent()
