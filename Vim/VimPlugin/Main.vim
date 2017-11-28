@@ -1,6 +1,7 @@
 let column="false"
 let indent="false"
 let mouse="true"
+let makeThis="false"
 let extension=expand('%:e')
 
 let cmd="./"
@@ -10,9 +11,9 @@ let mkargs=""
 noremap <F2> :let args=""<left>
 noremap <F3> :let cmd=""<left>
 noremap <F4> :let mkargs=""<left>
+noremap m :call MakeThis()<enter>
 noremap J gq<left>
 noremap L :noh<enter>
-noremap cc :call Column()<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
 noremap E :call Indent()<enter>
@@ -81,21 +82,6 @@ function! Load(program)
 
 endfunction
 
-function! Column()
-    if g:column == "false"
-        highlight OverLength ctermbg=red
-        match OverLength /\%81v.\+/
-                                    " \%81v from 81 character
-                                    " . any character
-                                    " \+ more than one
-        let g:column="true"
-    else
-        highlight OverLength cterm=NONE ctermbg=black
-        let g:column="false"
-    endif
-
-endfunction
-
 function! Print()
 
     if g:extension == "C" || g:extension == "cpp"
@@ -133,6 +119,20 @@ function! Run()
         :call PdfLatex()
     elseif g:extension == "asm" || g:extension == "inc"
         :call Nasm()
+    endif
+
+endfunction
+
+function! MakeThis()
+
+    if g:makeThis == "true"
+        let g:mkargs=""
+        echom "Make only this disabled"
+        let g:makeThis="false"
+    else
+        let g:mkargs="%:r"
+        echom "Make only this enabled"
+        let g:makeThis="true"
     endif
 
 endfunction
