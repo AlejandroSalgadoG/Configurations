@@ -18,12 +18,18 @@ noremap <F2> :call LatexBib()<enter>
 noremap <F3> :call Latex()<enter>
 noremap <F4> :call LatexDiap()<enter>
 
+au BufNewFile Makefile :call Make()
+au BufRead Makefile :call Make()
 au BufNewFile *.C :call Cpp()
 au BufNewFile *.h :call Hpp()
 au BufNewFile *.java :call Java()
 au BufNewFile *.cs :call Csharp()
 au BufNewFile *.hs :call Haskell()
-au BufRead Makefile set noexpandtab
+
+function! Make()
+    set noexpandtab
+    set nocindent
+endfunction
 
 function! Column()
     exe "set colorcolumn=".join(range(81,200),',')
@@ -121,8 +127,7 @@ function! Gpp()
 endfunction
 
 function! MakeCppHead(name)
-    set noexpandtab
-    set nocindent
+    :call Make()
     exe "normal i".a:name.": ".a:name.".o\n
         \\tg++ ".a:name.".o -o ".a:name."\n\n"
         \.a:name.".o: ".a:name.".C\n
@@ -130,8 +135,7 @@ function! MakeCppHead(name)
 endfunction
 
 function! MakeCppClean(name)
-    set noexpandtab
-    set nocindent
+    :call Make()
     exe "normal o\nclean:\n\trm -f *.o ".a:name
 endfunction
 
@@ -157,8 +161,7 @@ function! Javac(...)
 endfunction
 
 function! MakeJavaHead(name)
-    set noexpandtab
-    set nocindent
+    :call Make()
     exe "normal i".a:name.".class: ".a:name.".java\n
         \\tjavac ".a:name.".java\n"
 endfunction
@@ -189,8 +192,7 @@ function! Gmcs()
 endfunction
 
 function! MakeCsharpHead(name)
-    set noexpandtab
-    set nocindent
+    :call Make()
     exe "normal i".a:name.": "a:name.".cs\n
         \\tgmcs -out:".a:name." ".a:name.".cs\n\n"
 endfunction
