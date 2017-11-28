@@ -112,7 +112,6 @@ endfunction
 function! Gpp()
     let name=expand('%:r')
     if filereadable("Makefile")
-        make clean
         make
         make exe
     else
@@ -147,7 +146,6 @@ endfunction
 function! Javac(...)
     let name=expand('%:r')
     if filereadable("Makefile")
-        make clean
         make
         make exe
     else
@@ -179,7 +177,6 @@ endfunction
 function! Gmcs()
     let name=expand('%:r')
     if filereadable("Makefile")
-        make clean
         make
         make exe
     else
