@@ -58,11 +58,12 @@ function Start()
         call Load("Haskell")
     elseif g:extension == "asm"
         call Load("Asm")
+    else
+        call Load("Other")
     endif
 endfunction
 
 function! Load(program)
-
     let cmdPath=expand('~/Github/Vim/VimPlugin/')
     let auto=cmdPath.a:program."/Autocomplete.vim"
     let print=cmdPath.a:program."/Print.vim"
@@ -82,11 +83,9 @@ function! Load(program)
     else
         exe "so ".interpret
     endif
-
 endfunction
 
 function! Print()
-
     if g:extension == "C" || g:extension == "cpp"
         :call PrintCpp()
     elseif g:extension == "c"
@@ -102,7 +101,6 @@ function! Print()
     elseif g:extension == "asm"
         :call PrintAsm()
     endif
-
 endfunction
 
 function! Run()
@@ -126,6 +124,8 @@ function! Run()
         :call PdfLatex()
     elseif g:extension == "asm" || g:extension == "inc"
         :call Nasm()
+    else
+        :call Other()
     endif
 
 endfunction
@@ -136,7 +136,6 @@ function! MakeExe()
 endfunction
 
 function! MakeThis()
-
     if g:makeThis == "true"
         let g:mkargs=""
         echom "Make only this disabled"
@@ -146,11 +145,9 @@ function! MakeThis()
         echom "Make only this enabled"
         let g:makeThis="true"
     endif
-
 endfunction
 
 function! Mouse()
-
     if g:mouse == "true"
         set mouse=r
         echom "Mouse disabled"
@@ -160,7 +157,6 @@ function! Mouse()
         echom "Mouse enabled"
         let g:mouse="true"
     endif
-
 endfunction
 
 function! Clean()
@@ -169,7 +165,6 @@ function! Clean()
 endfunction
 
 function! Indent()
-
     if g:indent == "true"
         set cindent
         echom "Indent enabled"
@@ -179,7 +174,6 @@ function! Indent()
         echom "Indent disabled"
         let g:indent="true"
     endif
-
 endfunction
 
 function! Sudo()
