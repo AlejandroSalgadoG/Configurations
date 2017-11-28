@@ -1,33 +1,49 @@
-command W execute "!run %"
-command T execute "tabnew"
+" the run command compiles, runs a java file and delete the .class file:
+" Here's the code
+" run(){
+"  program=$1
+"  javac $1
+"  if [ $? -eq 0 ]; then
+"   if [ -z $2 ]; then
+"    java ${program/.java/""}
+"   else
+"    java ${program/.java/""} ${*:2}
+"   fi
+"  fi
+"
+"  rm -f *.class
+" }
+
+command W execute "!run %" |" executes the run command with the current file
+command T execute "tabnew" |" Open a new tab
 command S execute "normal OSystem.out.println();"
 
 let name = expand('%:r')
 
-au BufNewFile *.java exe "normal Opublic class"name "{\n\n public static void main(String[] args){\n" name tolower(name) "= new"name."()".";\n}\n}\<Esc>gg"
+au BufNewFile *.java exe "normal Opublic class"name "{\n\n"."public static void main(String[] args){\n".name tolower(name) "= new"name."()".";\n}\n}\<Esc>gg" |" this command copy the definition of the class, creates the main method and instanciates the class 
 
-set cindent
-set hlsearch
-set mouse=a
+" in this case the class description and the main method
+set cindent " auto indentation
+set hlsearch " highlight the search
+set mouse=a " allows to use the mouse in all modes
 
+" set tab as 4 spaces
 set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
+set tabstop=4
 
-set tabstop=4 
-
-set wildmenu "El mejor menu que existe
-set cursorline
-
-set autoread "cambia autamaticamente si el archivo es modificado de afuera
-			 
-set noswapfile "no crea .swp
-set nobackup "no hace backup
-set nowb 
-
-set shellcmdflag=-ic "deja utilizar ALIAS!
-
-syntax on
+set wildmenu " Menu for auto completation
+set cursorline " Line over the current position
+set autoread " Automatically update the files if an external change occurs
+   
+" Dont create extra file
+set noswapfile
+set nobackup
+set nowb
+   
+set shellcmdflag=-ic " allows to use the alias
+syntax on " Colors on
 color zellner
