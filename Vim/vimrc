@@ -19,4 +19,4 @@ set noswapfile
 set nobackup
 set nowb
 
-match WhiteSpace /\s\+$/
+match WhiteSpace /\s\+$/ " highlight the unwanted spaces
