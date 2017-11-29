@@ -1,5 +1,6 @@
 #!/bin/bash
 
+alias clave="copy ~/.Apolo/key.txt"
 alias aliases="vim ~/Github/Bash/bash_aliases"
 alias bashrc="vim ~/Github/Bash/bashrc"
 alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
@@ -14,7 +15,6 @@ alias shoot="import -window root screenshot.jpg"
 # Aliases to shorten linux commands
 alias x="exit"
 alias e="make exe"
-alias open="gnome-open"
 alias k="killall"
 alias deb="sudo dpkg -i"
 alias untar="tar zxf"
@@ -33,6 +33,19 @@ alias cd="cd-git"
 alias git="git-special"
 
 # Functions
+
+open(){
+     case "$1" in
+        *.pdf )
+            xpdf $1 & ;;
+        *.jpg | *.jpeg | *.png )
+            feh $1 ;;
+        * )
+            echo Help:
+            echo '  open file.[pdf|jpg|png]'
+            return 1;;
+    esac
+}
 
 git-special(){
 
