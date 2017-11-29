@@ -2,23 +2,34 @@
 
 alias st="multi special; nitrogen --restore"
 
-alias math="Mathematica &"
+alias thorkey="copy ~/.Apolo/key.txt"
 alias aliases="vim ~/Github/Bash/bash_aliases"
 alias bashrc="vim ~/Github/Bash/bashrc"
 alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
 alias vimrc="vim ~/Github/Vim/vimrc"
-alias off="sudo poweroff"
-alias sl="ls -lh"
-alias ps="ps -aux"
+alias asm="vim /usr/include/asm/unistd_64.h"
+
+# Alias for i3
+alias shoot="import -window root screenshot.jpg"
 
 # Aliases to shorten linux commands
 alias x="exit"
 alias e="make exe"
 alias k="killall"
-#alias deb="sudo dpkg -i"
+alias ps="ps -aux"
+alias sl="ls -lh"
+alias off="sudo poweroff"
+alias deb="sudo dpkg -i"
 alias untar="tar zxf"
 alias exe="chmod u+x"
 alias grep="grep --color"
+alias math="Mathematica &"
+alias paint="kolourpaint"
+
+alias search="pacman -Ss"
+alias install="sudo pacman -S"
+alias remove="sudo pacman -Rs"
+alias fsearch="pkgfile"
 
 alias ls="ls --color"
 alias ll='ls -alF'
@@ -32,6 +43,34 @@ alias cd="cd-git"
 alias git="git-special"
 
 # Functions
+
+setkey(){
+    case "$1" in
+        "english" )
+            setxkbmap us -variant altgr-intl ;;
+        "español" )
+            setxkbmap latam ;;
+        * )
+            echo Help:
+            echo '  setkey english|español'
+            return 1;;
+    esac
+}
+
+win(){
+    case "$1" in
+        "on" )
+            sudo mount /dev/sda4 /mnt 
+            cd /mnt/Users/XIMENA/Desktop ;;
+        "off" )
+            cd
+            sudo umount /dev/sda4 ;;
+        * )
+            echo Help:
+            echo '  win on|off'
+            return 1;;
+    esac
+}
 
 open(){
      case "$1" in
@@ -89,10 +128,6 @@ cd-git(){
         PS1=$PS1_NORMAL
         unset REPO
     fi
-}
-
-search(){
-    sudo apt-cache search $1
 }
 
 ubuntu(){
