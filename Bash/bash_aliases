@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-alias bash_aliases="vim /home/alejandro/Github/Bash/bash_aliases"
+alias aliases="vim /home/alejandro/Github/Bash/bash_aliases"
 alias bashrc="vim /home/alejandro/Github/Bash/bashrc"
 alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Commands.vim"
 alias off="sudo poweroff"
@@ -16,6 +16,7 @@ alias dvi="xdvi"
 
 # Aliases to shorten linux commands
 alias x="exit"
+alias e="make exe"
 alias open="gnome-open"
 alias k="killall"
 alias deb="sudo dpkg -i"
@@ -32,11 +33,35 @@ alias exe="chmod u+x"
 alias doge="~/Github/Bash/doge.sh"
 
 # Functions
+
+cs(){
+    cd $1 && ls
+}
+
+usb(){
+    if [ -z $1 ]; then
+        echo Help:
+        echo 'usb on|off'
+        return 1
+    fi
+
+    if [ "$1" == "on" ]; then
+        sudo mount /dev/sdb /mnt
+        cd /mnt
+    elif [ "$1" == "off" ]; then
+        cd
+        sudo umount /mnt
+    else
+        echo "Unknown option"
+        return 1
+    fi
+}
+
 gitssh(){
     if [ -z $1 ]; then
         echo "Help:"
-        echo "gip [ip]"
-        echo "example: gip 192.168.1.0"
+        echo "gitssh [ip]"
+        echo "example: gitssh git@github..."
     else
         git remote set-url origin $1
     fi
@@ -48,12 +73,20 @@ gip(){
         echo "gip [ip]"
         echo "example: gip 192.168.1.0"
     else
-        sudo nmap -sP $1/24
+        sudo nmap -sP $1
     fi
 }
 
+Ncl(){
+    export NCARG_ROOT=/mnt/home/alejandro/SC15/Wrf/Programs/Ncl/
+    export PATH=/mnt/home/alejandro/SC15/Wrf/Programs/Ncl/bin:$PATH
+}
+
 centos(){
-    if [ "$1" == "on" ]; then
+    if [ -z $1 ]; then
+        sudo mount /dev/sda10 /mnt
+        cd /mnt/home/alejandro/SC15/Wrf/Programs/Ncl/lib/ncarg/nclscripts/wrf
+    elif [ "$1" == "on" ]; then
         sudo mount /dev/sda10 /mnt
         sudo mount --bind /dev /mnt/dev/
         sudo mount --bind /dev/pts /mnt/dev/pts
@@ -66,8 +99,7 @@ centos(){
         sudo umount /mnt/proc/
         sudo umount /mnt/dev/pts
         sudo umount /mnt/dev
-        sudo umount /mnt
-        echo "Welcome to Ubuntu 14.10"
+        sudo umount /mnt && echo "Welcome to Ubuntu 14.10"
     else
         echo "Help:"
         echo "centos [on | off]"
@@ -83,7 +115,7 @@ zpp(){
         "c" )
             cd $RTSP/CImplementation/Server ;;
         "ce" )
-            cd $RTSP/CImplementation/Examples/Camera/ ;;
+            cd $RTSP/CImplementation/Examples/Socket/Udp ;;
         "co" )
             cd $RTSP/Legacy/Full
             javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ MultiServer.java
@@ -94,6 +126,8 @@ zpp(){
             javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ VideoStream.java ;;
         "j" )
             cd $RTSP/JImplementation/Client ;;
+        "je" )
+            cd $RTSP/JImplementation/Examples/Sockets/Basic/Udp ;;
         "l" )
             cd $RTSP/Legacy/Full ;;
         * )
@@ -113,9 +147,41 @@ find2(){
 multi(){
     if [ -z $1 ]; then
         xrandr --auto
-    else
-        xrandr --output DP1 --auto --$1-of eDP1
     fi
+
+    case "$1" in
+        "right" )
+            case "$2" in
+                "vga" )
+                    xrandr --output DP1 --auto --$1-of eDP1 ;;
+                "hdmi" )
+                    xrandr --output HDMI1 --auto --$1-of eDP1 ;;
+                * )
+                    echo "Output not recognised" ;;
+            esac ;;
+        "left" )
+            case "$2" in
+                "vga" )
+                    xrandr --output DP1 --auto --$1-of eDP1 ;;
+                "hdmi" )
+                    xrandr --output HDMI1 --auto --$1-of eDP1 ;;
+                * )
+                    echo "Output not recognised" ;;
+            esac ;;
+        "same" )
+            case "$2" in
+                "vga" )
+                    xrandr --output DP1 --same-as eDP1 ;;
+                "hdmi" )
+                    xrandr --output HDMI1 --same-as eDP1 ;;
+                * )
+                    echo "Output not recognised" ;;
+            esac ;;
+        "special" )
+            xrandr --output HDMI1 --mode 1920x1080 --right-of eDP1 --output DP1 --auto --right-of HDMI1 ;;
+        * )
+            echo "$1 is not a valid option, use same or direction" ;;
+    esac
 }
 
 get(){
@@ -181,4 +247,18 @@ pdf(){
 
 diap(){
     pdflatex $1 && cdiap && archivo=$1 && open ${archivo/.tex/.pdf}
+}
+
+tempo(){
+
+    TIME=$[ $1 * 60 + $2]
+
+    while [ 0 -ne $TIME ]; do
+        sleep 1
+        TIME=$[ $TIME - 1 ]
+        echo $TIME
+    done
+
+    killall chrome
+    poweroff
 }
