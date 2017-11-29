@@ -1,3 +1,7 @@
+#!/usr/bin/bash
+
+alias bash_aliases="vim /home/alejandro/Github/Bash/bash_aliases"
+alias bashrc="vim /home/alejandro/Github/Bash/bashrc"
 alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Commands.vim"
 alias off="sudo poweroff"
 alias sl="ls -lh"
@@ -28,6 +32,48 @@ alias exe="chmod u+x"
 alias doge="~/Github/Bash/doge.sh"
 
 # Functions
+gitssh(){
+    if [ -z $1 ]; then
+        echo "Help:"
+        echo "gip [ip]"
+        echo "example: gip 192.168.1.0"
+    else
+        git remote set-url origin $1
+    fi
+}
+
+gip(){
+    if [ -z $1 ]; then
+        echo "Help:"
+        echo "gip [ip]"
+        echo "example: gip 192.168.1.0"
+    else
+        sudo nmap -sP $1/24
+    fi
+}
+
+centos(){
+    if [ "$1" == "on" ]; then
+        sudo mount /dev/sda10 /mnt
+        sudo mount --bind /dev /mnt/dev/
+        sudo mount --bind /dev/pts /mnt/dev/pts
+        sudo mount --bind /proc/ /mnt/proc/
+        sudo mount --bind /sys /mnt/sys
+        echo "Welcome to Centos 7"
+        sudo chroot /mnt
+    elif [ "$1" == "off" ]; then
+        sudo umount /mnt/sys
+        sudo umount /mnt/proc/
+        sudo umount /mnt/dev/pts
+        sudo umount /mnt/dev
+        sudo umount /mnt
+        echo "Welcome to Ubuntu 14.10"
+    else
+        echo "Help:"
+        echo "centos [on | off]"
+    fi
+}
+
 zpp(){
     RTSP=/home/alejandro/Github/Zpp/RTSP
 

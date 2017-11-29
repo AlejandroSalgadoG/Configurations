@@ -53,11 +53,9 @@ mv photo.jpg doge.jpg
 
 cd ..
 
-cp Github/Bash/bash_aliases .
-mv bash_aliases .bash_aliases
+cp Github/Bash/.bash_aliases .
 
-cp Github/Bash/bashrc .
-mv bashrc .bashrc
+cp Github/Bash/.bashrc .
 
 cp Github/Bash/config .i3/
 sudo cp Github/Bash/i3status.conf /etc
