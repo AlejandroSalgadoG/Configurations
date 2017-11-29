@@ -86,9 +86,9 @@ slurm(){
             vboxmanage startvm Slurm1 --type headless
             vboxmanage startvm Slurm2 --type headless ;;
         "off" )
-            vboxmanage controlvm Slurmaster poweroff
-            vboxmanage controlvm Slurm1 poweroff
-            vboxmanage controlvm Slurm2 poweroff ;;
+            vboxmanage controlvm Slurm1 savestate
+            vboxmanage controlvm Slurm2 savestate
+            vboxmanage controlvm Slurmaster savestate ;;
         "list" )
             vboxmanage list runningvms ;;
         * )
