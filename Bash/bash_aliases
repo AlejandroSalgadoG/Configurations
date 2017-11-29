@@ -36,6 +36,40 @@ alias doge="~/Github/Bash/doge.sh"
 
 # Functions
 
+slurm(){
+    case "$1" in
+        "on" )
+            vboxmanage startvm SlurmMaster --type headless
+            vboxmanage startvm Slurm1 --type headless
+            vboxmanage startvm Slurm2 --type headless ;;
+        "auto" )
+            case "$2" in
+                "on" )
+                    vboxmanage startvm SlurmMasterAuto --type headless
+                    vboxmanage startvm Slurm1Auto --type headless
+                    vboxmanage startvm Slurm2Auto --type headless ;;
+                "off" )
+                    vboxmanage controlvm SlurmMasterAuto poweroff
+                    vboxmanage controlvm Slurm1Auto poweroff
+                    vboxmanage controlvm Slurm2Auto poweroff ;;
+                * )
+                    echo Help:
+                    echo '  slurm auto on|off'
+                    return 1 ;;
+            esac ;;
+        "off" )
+            vboxmanage controlvm SlurmMaster poweroff
+            vboxmanage controlvm Slurm1 poweroff
+            vboxmanage controlvm Slurm2 poweroff ;;
+        "list" )
+            vboxmanage list runningvms ;;
+        * )
+            echo Help:
+            echo '  slurm [auto] on|off|list'
+            return 1 ;;
+    esac
+}
+
 cs(){
     cd $1 && ls
 }
@@ -139,7 +173,7 @@ zpp(){
 
 
 copy(){
-    xclip -sel clip < $1
+    xclip -sel clip $1
 }
 
 find2(){
@@ -180,7 +214,7 @@ multi(){
                     echo "Output not recognised" ;;
             esac ;;
         "special" )
-            xrandr --output HDMI1 --mode 1920x1080 --right-of eDP1 --output DP1 --auto --right-of HDMI1 ;;
+            xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1 --output DP1 --auto --left-of HDMI1 ;;
         * )
             echo "$1 is not a valid option, use same or direction" ;;
     esac
