@@ -119,3 +119,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export HDF5_DIR=/home/alejandro/Programs/Hdf5
+export LD_LIBRARY_PATH=/home/alejandro/Programs/Hdf5/lib:/home/alejandro/Programs/Allinea/lib:$LD_LIBRARY_PATH
+export LIBRARY_PATH=/home/alejandro/Programs/Hdf5/lib:/home/alejandro/Programs/Allinea/lib:$LIBRARY_PATH
