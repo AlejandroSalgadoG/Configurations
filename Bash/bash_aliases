@@ -1,113 +1,117 @@
+source /home/alejandro/Github/ResRst/script.sh
+source /home/alejandro/Dropbox/Universidad/Compiladores/lexer_st0270/Test.sh
+alias antlr4="java -jar /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/antlr-4.5-complete.jar"
+alias comp="open /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/ST0270-2015-1-Practica-02.pdf"
+alias abook="open /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/Antlr4.pdf"
+alias gram="open /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/Gramatica.pdf"
+
+# Alias for i3
+alias shoot="import -window root screenshot.jpg"
+
 # Alias to manage the latex compilation
 alias lpdf="pdflatex"
-alias cpdf="rm -f *.aux *.log"
+alias cpdf="rm -f *.out *.dvi *.blg *.bbl *.aux *.log"
 alias cdiap="rm -f *.nav *.out *.snm *.toc *.aux *.log"
 alias dvi="xdvi"
-
-# Alias to manage the descompressed operations
-alias untar="tar zxvf"
 
 # Aliases to shorten linux commands
 alias x="exit"
 alias open="gnome-open"
 alias k="killall"
 alias deb="sudo dpkg -i"
-alias home="open ~/"
 alias msg="notify-send"
+alias rf="rm -r"
 # alias rm="rm -i"       # Uncomment to activate the interactive mode of rm
 alias moo="apt-get moo"  # Prints a cow on the terminal
+alias put="banner"
 alias bin="xxd -b"       # Prints the binary representation of a file
+alias untar="tar zxvf"
+alias exe="chmod u+x"
 
 # Aliases to open programs
-alias dropbox="dropbox start"
-alias paint="kolourpaint& exit"
-alias firefox="firefox& exit"
-alias cheese="cheese& exit"
-alias sdk="android& exit"
-alias studio="sh ~/android-studio/bin/studio.sh& exit"
+alias vilist="VBoxManage list runningvms"
+alias master="VBoxManage startvm Master --type headless &"
+alias slaves="(VBoxManage startvm Slave2 --type headless &) ; (VBoxManage startvm Slave1 --type headless &)"
+alias viconnect="ssh root@127.0.0.1 -p 2222"
 
 # Prints doge on the terminal
-alias doge="~/Github/Bash/doge.sh" 
+alias doge="~/Github/Bash/doge.sh"
 
-#Functions
+# Functions
 
-dl(){ # This is a version of the rm command but instead of delete       
-      # the files dl moves it to a folder call .Trash on the home directory
-    mv $@ ~/.Trash
+find2(){
+    find . -iname $1
 }
 
-refresh(){  # This function reload the .bash_aliases file
+multi(){
+    if [ -z $1 ]; then
+        xrandr --auto
+    else
+        xrandr --output VGA1 --auto --$1-of LVDS1
+    fi
+}
+
+get(){
+    history | grep $1
+}
+
+refresh(){
     source ~/.bash_aliases
     echo Done
 }
 
-mkjar(){  # Creates the jar file from a java file and erase the unnecesary data  
-        fl=$1 
-        javac $1  
-        if [ $? -eq 0 ]; then
-            echo Main-Class: ${fl/.java/""} > MANIFEST.MF  
-            jar -cvmf MANIFEST.MF ${fl/.java/.jar} ${fl/.java/.class}
-        fi
-        rm -f *.class MANIFEST.MF
+mkjar(){
+        fl=$1 && javac $1 && echo Main-Class: ${fl/.java/""} > MANIFEST.MF && jar -cvmf MANIFEST.MF ${fl/.java/.jar} ${fl/.java/.class}
+        rm -f ${program/.java/.class} MANIFEST.MF
 }
 
-run(){  # This function compiles, runs a java file and delete the .class file:
-	program=$1 
-    javac $1 
+run(){
+	program=$1
+    javac $1
     if [ $? -eq 0 ]; then
-        if [ -z $2 ]; then 
-            java ${program/.java/""}  
-        else 
-            java ${program/.java/""} ${*:2} 
+        if [ -z $2 ]; then
+            java ${program/.java/""}
+        else
+            java ${program/.java/""} ${*:2}
         fi
     fi
-            
+
     rm -f *.class
 }
 
-hrun(){  # This function compiles, runs a haskell file and deletes the compile file:
+hrun(){
     program=$1
     ghc $1
-    if [ $? -eq 0 ]; then 
+    if [ $? -eq 0 ]; then
         echo ""
         ./${program/.hs/""}
     fi
 
-    rm -f *.hi *.o ${program/.hs/""} 
+    rm -f *.hi *.o ${program/.hs/""}
 }
 
-pdf(){   # This function compiles a latex file, erase the unnecesary files 
-         # and open it with your pdf manager program
-
-	lpdf $1 
+pdfbib(){
+	archivo=$1;
+    latex $1
     if [ $? -eq 0 ]; then
-        archivo=$1 
-        cpdf 
+        bibtex ${archivo/.tex/.aux}
+        latex $1
+        latex $1
+        lpdf $1
+        cpdf
         open ${archivo/.tex/".pdf"}
     fi
 }
 
-diap(){     # This function compiles a presentation on latex, erase the
-            # unnecesary files and open it with your pdf manager program
-            
-    lpdf $1 
-    if [ $? -eq 0]; then
-        cdiap 
-        archivo=$1 
-        open ${archivo/.tex/.pdf} 
-    else
-        cdiap    
+pdf(){
+	archivo=$1;
+    pdflatex $1
+    if [ $? -eq 0 ]; then
+        cpdf
+        open ${archivo/.tex/".pdf"}
     fi
 }
 
-latex2(){  # This function complies a latex file, erase the unnecesary files 
-           # and then open it with dvi 
-	latex $1  
-    if [ $? -eq 0 ]; then 
-        cpdf
-	    archivo=$1
-	    dvi ${archivo/.tex/"dvi"}
-    else 
-       cpdf 
-    fi
+diap(){
+    lpdf $1 && cdiap && archivo=$1 && open ${archivo/.tex/.pdf}
 }
