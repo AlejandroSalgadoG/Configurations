@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 alias aliases="vim /home/alejandro/Github/Bash/bash_aliases"
 alias bashrc="vim /home/alejandro/Github/Bash/bashrc"
 alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Commands.vim"
@@ -39,17 +37,17 @@ alias doge="~/Github/Bash/doge.sh"
 slurm(){
     case "$1" in
         "on" )
-            vboxmanage startvm SlurmMaster --type headless
+            vboxmanage startvm Slurmaster --type headless
             vboxmanage startvm Slurm1 --type headless
             vboxmanage startvm Slurm2 --type headless ;;
         "auto" )
             case "$2" in
                 "on" )
-                    vboxmanage startvm SlurmMasterAuto --type headless
+                    vboxmanage startvm SlurmasterAuto --type headless
                     vboxmanage startvm Slurm1Auto --type headless
                     vboxmanage startvm Slurm2Auto --type headless ;;
                 "off" )
-                    vboxmanage controlvm SlurmMasterAuto poweroff
+                    vboxmanage controlvm SlurmasterAuto poweroff
                     vboxmanage controlvm Slurm1Auto poweroff
                     vboxmanage controlvm Slurm2Auto poweroff ;;
                 * )
@@ -58,7 +56,7 @@ slurm(){
                     return 1 ;;
             esac ;;
         "off" )
-            vboxmanage controlvm SlurmMaster poweroff
+            vboxmanage controlvm Slurmaster poweroff
             vboxmanage controlvm Slurm1 poweroff
             vboxmanage controlvm Slurm2 poweroff ;;
         "list" )
