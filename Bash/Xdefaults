@@ -1,0 +1,6 @@
+URxvt*background: Black
+URxvt*foreground: Green
+URxvt*scrollBar: true
+URxvt.font:xft:Monospace:pixelsize=19
+URxvt.boldfont:xft:Monospace-Bold:pixelsize=17
+URxvt.letterSpace: -1

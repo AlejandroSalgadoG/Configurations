@@ -8,6 +8,7 @@ FBLE="\[\033[34m\]" # foreground blue
 
 PS1="${HC}${FBLE}you are in \w $FYEL-> $RS"
 
+alias ls='ls --color'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
