@@ -1,0 +1,97 @@
+# Alias to manage the latex compilation
+alias lpdf="pdflatex"
+alias cpdf="rm -f *.aux *.log"
+alias cdiap="rm -f *.nav *.out *.snm *.toc *.aux *.log"
+alias dvi="xdvi"
+
+# Alias to manage the descompressed operations
+alias untar="tar zxvf"
+
+# Aliases to shorten linux commands
+alias x="exit"
+alias open="gnome-open"
+alias k="killall"
+alias deb="sudo dpkg -i"
+alias home="open ~/"
+alias msg="notify-send"
+# alias rm="rm -i"       # Uncomment to activate the interactive mode of rm
+alias moo="apt-get moo"  # Prints a cow on the terminal
+alias bin="xxd -b"       # Prints the binary representation of a file
+
+# Aliases to open programs
+alias dropbox="dropbox start"
+alias paint="kolourpaint& exit"
+alias firefox="firefox& exit"
+alias cheese="cheese& exit"
+alias sdk="android& exit"
+alias studio="sh ~/android-studio/bin/studio.sh& exit"
+
+# Prints doge on the terminal
+alias doge="~/Dropbox/Bash/doge.sh" 
+
+#Functions
+
+dl(){ # This is a version of the rm command but instead of delete the files dl moves it to a folder call .Trash on the home directory
+    mv $@ ~/.Trash
+}
+
+refresh(){  # This function reload the .bash_aliases file
+    source ~/.bash_aliases
+    echo Done
+}
+
+mkjar(){  # Creates the jar file from a java file and erase the unnecesary data  
+        fl=$1 
+        javac $1  
+        if [ $? -eq 0 ]; then
+            echo Main-Class: ${fl/.java/""} > MANIFEST.MF  
+            jar -cvmf MANIFEST.MF ${fl/.java/.jar} ${fl/.java/.class}
+        fi
+        rm -f *.class MANIFEST.MF
+}
+
+run(){  # This function compiles, runs a java file and delete the .class file:
+	program=$1 
+    javac $1 
+    if [ $? -eq 0 ]; then
+        if [ -z $2 ]; then 
+            java ${program/.java/""}  
+        else 
+            java ${program/.java/""} ${*:2} 
+        fi
+    fi
+            
+    rm -f *.class
+}
+
+pdf(){   # This function compiles a latex file, erase the unnecesary files and open it with your pdf manager program
+
+	lpdf $1 
+    if [ $? -eq 0 ]; then
+        archivo=$1 
+        cpdf 
+        open ${archivo/.tex/".pdf"}
+    fi
+}
+
+diap(){     # This function compiles a presentation on latex, erase the unnecesary files and open it with your pdf manager program
+    lpdf $1 
+    if [ $? -eq 0]; then
+        cdiap 
+        archivo=$1 
+        open ${archivo/.tex/.pdf} 
+    else
+        cdiap    
+    fi
+}
+
+latex2(){  # This function complies a latex file, erase the unnecesary files and then open it with dvi 
+	latex $1  
+    if [ $? -eq 0 ]; then 
+        cpdf
+	    archivo=$1
+	    dvi ${archivo/.tex/"dvi"}
+    else 
+       cpdf 
+    fi
+}
