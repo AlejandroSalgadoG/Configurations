@@ -17,17 +17,16 @@ echo "source ~/Bash/bash_aliases" > .bash_aliases
 sed -i "10,12d" Bash/bash_aliases
 sed -i "14d" Bash/bash_aliases
 sed -i "15,21d" Bash/bash_aliases
-sed -i "19,21d" Bash/bash_aliases
-sed -i "21,24d" Bash/bash_aliases
-sed -i "21,54d" Bash/bash_aliases
-sed -i "26,44d" Bash/bash_aliases
-sed -i "26,49d" Bash/bash_aliases
-sed -i "34,73d" Bash/bash_aliases
+sed -i "24,26d" Bash/bash_aliases
+sed -i "26,63d" Bash/bash_aliases
+sed -i "30,72d" Bash/bash_aliases
+sed -i "38,77d" Bash/bash_aliases
 
 sed -i "7d" Bash/bashrc
 sed -i '7iFRED="\\[\\033[31m\\]" # foreground red' Bash/bashrc
 sed -i "10d" Bash/bashrc
 sed -i '10iPS1="${FWHI}\\T ${HC}${FRED}you are in ${FWHI}\\h ${FRED}on \\w $FYEL-> $RS"' Bash/bashrc
+sed -i "23d" Bash/bashrc
 
 sed -i "s/Github\///g" Bash/bash_aliases
 
