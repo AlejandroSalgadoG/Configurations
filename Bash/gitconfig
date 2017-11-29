@@ -1,0 +1,16 @@
+[user]
+	email = asalgad2@eafit.edu.co
+	name = Alejandro Salgado G
+[push]
+	default = simple
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[alias]
+	l = log --pretty=\"%h - %s %d\" --graph
+	d = difftool
+	co = checkout
+    s = status

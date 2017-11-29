@@ -6,7 +6,7 @@ alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
 alias off="sudo poweroff"
 alias sl="ls -lh"
 alias asm="vim /usr/include/x86_64-linux-gnu/asm/unistd_32.h"
-alias ..="cd .."
+alias ps="ps -aux"
 
 # Alias for i3
 alias shoot="import -window root screenshot.jpg"
@@ -17,7 +17,7 @@ alias e="make exe"
 alias open="gnome-open"
 alias k="killall"
 alias deb="sudo dpkg -i"
-alias untar="tar zxvf"
+alias untar="tar zxf"
 alias exe="chmod u+x"
 alias grep="grep --color"
 
