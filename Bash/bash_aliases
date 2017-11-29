@@ -47,7 +47,7 @@ git-special(){
        branch=$(\git rev-parse --abbrev-ref HEAD)
        commit=$(\git rev-parse --short HEAD)
 
-       PS1="${WHI}\T ${HC}${RED}Branch ${WHI}$branch ${RED}Commit ${WHI}$commit ${YEL}-> $RS"
+       PS1="${HC}${WHI}\T ${GRE}Branch ${WHI}$branch ${GRE}Commit ${WHI}$commit ${BLU}-> $RS"
     fi
 }
 
@@ -62,10 +62,10 @@ cd-git(){
        branch=$(\git rev-parse --abbrev-ref HEAD)
        commit=$(\git rev-parse --short HEAD)
 
-       PS1="${WHI}\T ${HC}${RED}Branch ${WHI}$branch ${RED}Commit ${WHI}$commit ${YEL}-> $RS"
+       PS1="${HC}${WHI}\T ${GRE}Branch ${WHI}$branch ${GRE}Commit ${WHI}$commit ${BLU}-> $RS"
 
     else
-        PS1="${WHI}\T ${HC}${GRE}\w $BLU-> $RS"
+        PS1="${HC}${WHI}\T ${GRE}\w $BLU-> $RS"
         unset repo
     fi
 }

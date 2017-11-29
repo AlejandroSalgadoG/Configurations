@@ -13,7 +13,7 @@ MAG="\[\033[35m\]"  # magenta
 CYA="\[\033[36m\]"  # cyan
 WHI="\[\033[37m\]"  # white
 
-PS1="${WHI}\T ${HC}${GRE}\w $BLU-> $RS"
+PS1="${HC}${WHI}\T ${GRE}\w $BLU-> $RS"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
