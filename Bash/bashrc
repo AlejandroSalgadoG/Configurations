@@ -3,16 +3,22 @@ HISTFILESIZE=2000
 
 RS="\[\033[0m\]"    # reset
 HC="\[\033[1m\]"    # hicolor
-FYEL="\[\033[33m\]" # foreground yellow
-FBLE="\[\033[34m\]" # foreground blue
-FWHI="\[\033[37m\]" # foreground white
 
-PS1="${FWHI}\T ${HC}${FBLE}you are in \w $FYEL-> $RS"
+BLA="\[\033[30m\]"  # black
+RED="\[\033[31m\]"  # red
+GRE="\[\033[32m\]"  # green
+YEL="\[\033[33m\]"  # yellow
+BLU="\[\033[34m\]"  # blue
+MAG="\[\033[35m\]"  # magenta
+CYA="\[\033[36m\]"  # cyan
+WHI="\[\033[37m\]"  # white
+
+PS1="${WHI}\T ${HC}${GRE}\w $BLU-> $RS"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
 export EDITOR=vim
-export LS_COLORS="di=1;34:fi=33:*.gz=1;31:*.bz2=1;31:*.pdf=96"
+export LS_COLORS="di=1;34:fi=0;37:ln=0;36:*.gz=1;31:*.bz2=1;31:*.pdf=1;31"
 export PATH=/home/alejandro/bin:$PATH
