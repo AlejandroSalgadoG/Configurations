@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias aliases="vim /home/alejandro/Github/Bash/bash_aliases"
 alias bashrc="vim /home/alejandro/Github/Bash/bashrc"
 alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Main.vim"
