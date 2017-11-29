@@ -3,6 +3,7 @@ HISTFILESIZE=2000
 
 RS="\[\033[0m\]"    # reset
 HC="\[\033[1m\]"    # hicolor
+UL="\[\033[4m\]"
 
 BLA="\[\033[30m\]"  # black
 RED="\[\033[31m\]"  # red
@@ -13,12 +14,25 @@ MAG="\[\033[35m\]"  # magenta
 CYA="\[\033[36m\]"  # cyan
 WHI="\[\033[37m\]"  # white
 
-PS1="${HC}${WHI}\T ${GRE}\w $BLU-> $RS"
+time="$HC${WHI}\T"
+wkdir="${WHI}\w"
+gitdir="$WHI"'$WKDIR'
+repo="$MAG"'$REPO'$HC
+branch="$BLU"'$BRANCH'
+commit="$BLU"'$COMMIT'
+end="${YEL}-> $RS"
+
+PS1_NORMAL="$time $wkdir $end"
+PS1_GIT="$repo $branch $commit $gitdir $end"
+
+PS1=$PS1_NORMAL
+
+unset time repo branch commit end
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
 export EDITOR=vim
-export LS_COLORS="di=1;34:fi=0;37:ln=0;36:*.gz=1;31:*.bz2=1;31:*.pdf=1;31"
+export LS_COLORS="di=0;32:fi=0;37:ln=0;36:ex=1;33:*.gz=1;31:*.bz2=1;31:*.pdf=0;31"
 export PATH=/home/alejandro/bin:$PATH

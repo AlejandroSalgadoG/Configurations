@@ -44,29 +44,30 @@ git-special(){
     fi
 
     if [ $? == 0 ] && [ $1 == "co" ] || [ $1 == "checkout" ]; then
-       branch=$(\git rev-parse --abbrev-ref HEAD)
-       commit=$(\git rev-parse --short HEAD)
+       BRANCH=$(\git rev-parse --abbrev-ref HEAD)
+       COMMIT=$(\git rev-parse --short HEAD)
 
-       PS1="${HC}${WHI}\T ${GRE}Branch ${WHI}$branch ${GRE}Commit ${WHI}$commit ${BLU}-> $RS"
+       PS1=$PS1_GIT
     fi
 }
 
 cd-git(){
     \cd $1
 
-    if [ -d .git ]; then repo=$(pwd |  basename `pwd`); fi
-    if [ -z $repo ]; then return; fi
+    if [ -d .git ]; then REPO=$(pwd |  basename `pwd`); fi
+    if [ -z $REPO ]; then return; fi
 
-    if pwd | grep -q $repo ; then
+    if pwd | grep -q $REPO ; then
 
-       branch=$(\git rev-parse --abbrev-ref HEAD)
-       commit=$(\git rev-parse --short HEAD)
+        BRANCH=$(\git rev-parse --abbrev-ref HEAD)
+        COMMIT=$(\git rev-parse --short HEAD)
+        WKDIR=$(sed -e s%^.*$REPO%.%g <<< $PWD)
 
-       PS1="${HC}${WHI}\T ${GRE}Branch ${WHI}$branch ${GRE}Commit ${WHI}$commit ${BLU}-> $RS"
+        PS1=$PS1_GIT
 
     else
-        PS1="${HC}${WHI}\T ${GRE}\w $BLU-> $RS"
-        unset repo
+        PS1=$PS1_NORMAL
+        unset REPO
     fi
 }
 
