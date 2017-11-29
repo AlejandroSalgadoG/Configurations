@@ -1,12 +1,14 @@
 #!/bin/bash
 
 alias clave="copy ~/.Apolo/key.txt"
+alias math="Mathematica &"
 alias aliases="vim ~/Github/Bash/bash_aliases"
 alias bashrc="vim ~/Github/Bash/bashrc"
 alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
+alias vimrc="vim ~/Github/Vim/vimrc"
 alias off="sudo poweroff"
 alias sl="ls -lh"
-alias asm="vim /usr/include/x86_64-linux-gnu/asm/unistd_32.h"
+alias asm="vim /usr/include/asm/unistd_64.h"
 alias ps="ps -aux"
 
 # Alias for i3
@@ -37,9 +39,11 @@ alias git="git-special"
 open(){
      case "$1" in
         *.pdf )
-            xpdf $1 & ;;
+            mupdf $@  &;;
         *.jpg | *.jpeg | *.png )
-            feh $1 ;;
+            feh $@ ;;
+        *pptx | *.docx )
+            libreoffice $@ ;;
         * )
             echo Help:
             echo '  open file.[pdf|jpg|png]'
@@ -90,6 +94,21 @@ cd-git(){
 
 search(){
     sudo apt-cache search $1
+}
+
+ubuntu(){
+    case "$1" in
+        "on" )
+            vboxmanage startvm Ubuntu --type headless ;;
+        "off" )
+            vboxmanage controlvm Ubuntu savestate ;;
+        "list" )
+            vboxmanage list runningvms ;;
+        * )
+            echo Help:
+            echo '  ubuntu on|off|list'
+            return 1 ;;
+    esac
 }
 
 slurm(){

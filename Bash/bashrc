@@ -35,5 +35,3 @@ fi
 
 export EDITOR=vim
 export LS_COLORS="di=0;32:fi=0;37:ln=0;36:ex=1;33:*.gz=1;31:*.bz2=1;31:*.pdf=0;31"
-export PATH=/home/alejandro/bin:$PATH
-export TERM="rxvt"
