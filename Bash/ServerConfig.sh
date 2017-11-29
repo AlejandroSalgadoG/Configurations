@@ -24,9 +24,13 @@ sed -i "26,44d" Bash/bash_aliases
 sed -i "26,49d" Bash/bash_aliases
 sed -i "34,73d" Bash/bash_aliases
 
-sed -i "s&alejandro/Github&$USER&g" Bash/bash_aliases
+sed -i "7d" Bash/bashrc
+sed -i '7iFRED="\\[\\033[31m\\]" # foreground red' Bash/bashrc
+sed -i "10d" Bash/bashrc
+sed -i '10iPS1="${FWHI}\\T ${HC}${FRED}you are in ${FWHI}\\h ${FRED}on \\w $FYEL-> $RS"' Bash/bashrc
+
+sed -i "s/Github\///g" Bash/bash_aliases
 
 cp Vim/vimrc .vimrc
 
-sed -i "s&alejandro/Github&$USER&g" .vimrc
-sed -i "s&Github&&g" Vim/VimPlugin/Main.vim
+sed -i "s/Github\///g" .vimrc
