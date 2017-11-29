@@ -31,7 +31,8 @@ alias doge="~/Dropbox/Bash/doge.sh"
 
 #Functions
 
-dl(){ # This is a version of the rm command but instead of delete the files dl moves it to a folder call .Trash on the home directory
+dl(){ # This is a version of the rm command but instead of delete       
+      # the files dl moves it to a folder call .Trash on the home directory
     mv $@ ~/.Trash
 }
 
@@ -64,7 +65,8 @@ run(){  # This function compiles, runs a java file and delete the .class file:
     rm -f *.class
 }
 
-pdf(){   # This function compiles a latex file, erase the unnecesary files and open it with your pdf manager program
+pdf(){   # This function compiles a latex file, erase the unnecesary files 
+         # and open it with your pdf manager program
 
 	lpdf $1 
     if [ $? -eq 0 ]; then
@@ -74,7 +76,9 @@ pdf(){   # This function compiles a latex file, erase the unnecesary files and o
     fi
 }
 
-diap(){     # This function compiles a presentation on latex, erase the unnecesary files and open it with your pdf manager program
+diap(){     # This function compiles a presentation on latex, erase the
+            # unnecesary files and open it with your pdf manager program
+            
     lpdf $1 
     if [ $? -eq 0]; then
         cdiap 
@@ -85,7 +89,8 @@ diap(){     # This function compiles a presentation on latex, erase the unnecesa
     fi
 }
 
-latex2(){  # This function complies a latex file, erase the unnecesary files and then open it with dvi 
+latex2(){  # This function complies a latex file, erase the unnecesary files 
+           # and then open it with dvi 
 	latex $1  
     if [ $? -eq 0 ]; then 
         cpdf
