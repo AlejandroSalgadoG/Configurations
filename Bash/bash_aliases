@@ -1,8 +1,11 @@
+alias asm="vim /usr/include/x86_64-linux-gnu/asm/unistd_32.h"
+
 alias aliases="vim /home/alejandro/Github/Bash/bash_aliases"
 alias bashrc="vim /home/alejandro/Github/Bash/bashrc"
-alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Commands.vim"
+alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Main.vim"
 alias off="sudo poweroff"
 alias sl="ls -lh"
+alias err?="echo $?"
 
 # Alias for i3
 alias shoot="import -window root screenshot.jpg"
@@ -34,25 +37,29 @@ alias doge="~/Github/Bash/doge.sh"
 
 # Functions
 
+search(){
+    sudo apt-cache search $1
+}
+
 slurm(){
     case "$1" in
         "on" )
             vboxmanage startvm Slurmaster --type headless
             vboxmanage startvm Slurm1 --type headless
             vboxmanage startvm Slurm2 --type headless ;;
-        "auto" )
+        "test" )
             case "$2" in
                 "on" )
-                    vboxmanage startvm SlurmasterAuto --type headless
-                    vboxmanage startvm Slurm1Auto --type headless
-                    vboxmanage startvm Slurm2Auto --type headless ;;
+                    vboxmanage startvm SlurmasterTest --type headless
+                    vboxmanage startvm Slurm1Test --type headless
+                    vboxmanage startvm Slurm2Test --type headless ;;
                 "off" )
-                    vboxmanage controlvm SlurmasterAuto poweroff
-                    vboxmanage controlvm Slurm1Auto poweroff
-                    vboxmanage controlvm Slurm2Auto poweroff ;;
+                    vboxmanage controlvm SlurmasterTest poweroff
+                    vboxmanage controlvm Slurm1Test poweroff
+                    vboxmanage controlvm Slurm2Test poweroff ;;
                 * )
                     echo Help:
-                    echo '  slurm auto on|off'
+                    echo '  slurm test on|off'
                     return 1 ;;
             esac ;;
         "off" )
@@ -63,7 +70,7 @@ slurm(){
             vboxmanage list runningvms ;;
         * )
             echo Help:
-            echo '  slurm [auto] on|off|list'
+            echo '  slurm [test] on|off|list'
             return 1 ;;
     esac
 }

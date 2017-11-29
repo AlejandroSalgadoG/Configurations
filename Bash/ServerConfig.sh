@@ -1,7 +1,12 @@
 #!/bin/bash
 
 cd
-sudo apt-get install -y git
+
+if grep -iq centos /etc/*-release; then
+    sudo yum install -y git
+else
+    sudo apt-get install -y git
+fi
 
 git clone https://github.com/AlejandroSalgadoG/Vim.git
 git clone https://github.com/AlejandroSalgadoG/Bash.git
