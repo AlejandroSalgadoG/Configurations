@@ -85,21 +85,6 @@ slurm(){
             vboxmanage startvm Slurmaster --type headless
             vboxmanage startvm Slurm1 --type headless
             vboxmanage startvm Slurm2 --type headless ;;
-        "test" )
-            case "$2" in
-                "on" )
-                    vboxmanage startvm SlurmasterTest --type headless
-                    vboxmanage startvm Slurm1Test --type headless
-                    vboxmanage startvm Slurm2Test --type headless ;;
-                "off" )
-                    vboxmanage controlvm SlurmasterTest poweroff
-                    vboxmanage controlvm Slurm1Test poweroff
-                    vboxmanage controlvm Slurm2Test poweroff ;;
-                * )
-                    echo Help:
-                    echo '  slurm test on|off'
-                    return 1 ;;
-            esac ;;
         "off" )
             vboxmanage controlvm Slurmaster poweroff
             vboxmanage controlvm Slurm1 poweroff
