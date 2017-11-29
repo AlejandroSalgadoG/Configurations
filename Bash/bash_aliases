@@ -2,10 +2,10 @@
 
 alias st="multi special; nitrogen --restore"
 
-alias aliases="vim ~/Github/Bash/bash_aliases"
-alias bashrc="vim ~/Github/Bash/bashrc"
-alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
-alias vimrc="vim ~/Github/Vim/vimrc"
+alias aliases="vim ~/Github/Configurations/Bash/bash_aliases"
+alias bashrc="vim ~/Github/Configurations/Bash/bashrc"
+alias vimc="vim ~/Github/Configurations/Vim/VimPlugin/Main.vim"
+alias vimrc="vim ~/Github/Configurations/Vim/vimrc"
 alias asm="vim /usr/include/asm/unistd_64.h"
 
 # Alias for i3
@@ -41,7 +41,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Prints doge on the terminal
-alias doge="~/Github/Bash/doge.sh"
+alias doge="~/Github/Configurations/Bash/doge.sh"
 
 alias cd="cd-git"
 alias git="git-special"

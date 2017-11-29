@@ -64,7 +64,7 @@ function Start()
 endfunction
 
 function! Load(program)
-    let cmdPath=expand('~/Github/Vim/VimPlugin/')
+    let cmdPath=expand('~/Github/Configurations/Vim/VimPlugin/')
     let auto=cmdPath.a:program."/Autocomplete.vim"
     let print=cmdPath.a:program."/Print.vim"
     let compile=cmdPath.a:program."/Compilation.vim"
