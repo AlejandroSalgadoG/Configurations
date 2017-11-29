@@ -2,7 +2,6 @@
 
 alias st="multi special; nitrogen --restore"
 
-alias thorkey="copy ~/.Apolo/key.txt"
 alias math="Mathematica &"
 alias aliases="vim ~/Github/Bash/bash_aliases"
 alias bashrc="vim ~/Github/Bash/bashrc"
@@ -10,17 +9,13 @@ alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
 alias vimrc="vim ~/Github/Vim/vimrc"
 alias off="sudo poweroff"
 alias sl="ls -lh"
-alias asm="vim /usr/include/asm/unistd_64.h"
 alias ps="ps -aux"
-
-# Alias for i3
-alias shoot="import -window root screenshot.jpg"
 
 # Aliases to shorten linux commands
 alias x="exit"
 alias e="make exe"
 alias k="killall"
-alias deb="sudo dpkg -i"
+#alias deb="sudo dpkg -i"
 alias untar="tar zxf"
 alias exe="chmod u+x"
 alias grep="grep --color"
@@ -44,7 +39,7 @@ open(){
             mupdf $@  &;;
         *.jpg | *.jpeg | *.png )
             feh $@ ;;
-        *.pptx | *.docx | *.ods )
+        *.pptx | *.docx | *.ods | *.xlsx )
             libreoffice $@ & ;;
         *.mp4 )
             vlc $1 & ;;
