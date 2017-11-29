@@ -65,6 +65,17 @@ run(){  # This function compiles, runs a java file and delete the .class file:
     rm -f *.class
 }
 
+hrun(){  # This function compiles, runs a haskell file and deletes the compile file:
+    program=$1
+    ghc $1
+    if [ $? -eq 0 ]; then 
+        echo ""
+        ./${program/.hs/""}
+    fi
+
+    rm -f *.hi *.o ${program/.hs/""} 
+}
+
 pdf(){   # This function compiles a latex file, erase the unnecesary files 
          # and open it with your pdf manager program
 
