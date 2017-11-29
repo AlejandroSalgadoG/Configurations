@@ -1,4 +1,4 @@
-HISTSIZE=1000
+HISTSIZE=2000
 HISTFILESIZE=2000
 
 RS="\[\033[0m\]"    # reset
@@ -8,11 +8,6 @@ FBLE="\[\033[34m\]" # foreground blue
 FWHI="\[\033[37m\]" # foreground white
 
 PS1="${FWHI}\T ${HC}${FBLE}you are in \w $FYEL-> $RS"
-
-alias ls='ls --color'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
