@@ -1,8 +1,8 @@
 #!/bin/bash
 
-alias aliases="vim /home/alejandro/Github/Bash/bash_aliases"
-alias bashrc="vim /home/alejandro/Github/Bash/bashrc"
-alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Main.vim"
+alias aliases="vim ~/Github/Bash/bash_aliases"
+alias bashrc="vim ~/Github/Bash/bashrc"
+alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
 alias off="sudo poweroff"
 alias sl="ls -lh"
 alias err?="echo $?"
