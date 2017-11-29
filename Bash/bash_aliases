@@ -28,6 +28,8 @@ alias put="banner"
 alias bin="xxd -b"       # Prints the binary representation of a file
 alias untar="tar zxvf"
 alias exe="chmod u+x"
+alias grep="grep --color"
+alias ls="ls --color"
 
 # Prints doge on the terminal
 alias doge="~/Github/Bash/doge.sh"

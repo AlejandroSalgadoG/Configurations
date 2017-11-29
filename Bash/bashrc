@@ -5,8 +5,9 @@ RS="\[\033[0m\]"    # reset
 HC="\[\033[1m\]"    # hicolor
 FYEL="\[\033[33m\]" # foreground yellow
 FBLE="\[\033[34m\]" # foreground blue
+FWHI="\[\033[37m\]" # foreground white
 
-PS1="${HC}${FBLE}you are in \w $FYEL-> $RS"
+PS1="${FWHI}\T ${HC}${FBLE}you are in \w $FYEL-> $RS"
 
 alias ls='ls --color'
 alias ll='ls -alF'
@@ -27,3 +28,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export EDITOR=vim
+export LS_COLORS="di=1;34:fi=33:*.gz=1;31:*.pdf=96"
