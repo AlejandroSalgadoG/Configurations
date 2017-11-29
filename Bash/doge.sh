@@ -1,0 +1,31 @@
+notify-send -t 1000 "Im Doge"
+notify-send -t 1000 "and im not going anywhere"
+notify-send -t 1000 "deal with me!"
+
+getAscii() {
+  [ "$1" -lt 256 ] || return 1
+  printf "\\$(printf '%03o' "$1")"
+}
+ 
+echo "                Y.                      _   "   
+echo "                YiL                   .$(getAscii 96)$(getAscii 96)$(getAscii 96). "
+echo "                Yii;                .; .;;&."
+echo "                YY;ii._           .;$(getAscii 96).;;;; :"
+echo "                iiYYYYYYiiiii;;;;i$(getAscii 96) ;;::;;;;"
+echo "            _.;YYYYYYiiiiYYYii  .;;.   ;;;"
+echo "         .YYYYYYYYYYiiYYYYYYYYYYYYii;$(getAscii 96)  ;;;;"
+echo "       .YYYYYYY$(getAscii 36)$(getAscii 36)YYiiYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)iiiYYYYYY;.ii;$(getAscii 96).."
+echo "      :YYY$(getAscii 36)$(getAscii 33).  TYiiYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYYiiYYYYiYYii."
+echo "      Y$(getAscii 36)MM$(getAscii 36):   :YYYYYY$(getAscii 36)$(getAscii 33)$(getAscii 34)$(getAscii 36)$(getAscii 36)$(getAscii 34)4YYYYYiiiYYYYiiYY."
+echo "   $(getAscii 96). :MM$(getAscii 36)$(getAscii 36)b.,dYY$(getAscii 36)$(getAscii 36)Yii$(getAscii 34) :$(getAscii 44)   YYYY11YiiYYYiYYY"
+echo "_.._ :$(getAscii 96)4MM$(getAscii 36)$(getAscii 33)YYYYYYYYYii,.__.diii$(getAscii 36)$(getAscii 36)YYYYYYYYYYY"
+echo ".,._$(getAscii 36)b$(getAscii 96)P$(getAscii 96)     $(getAscii 36)$(getAscii 34)4$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)iiiiiiii$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YiY;"
+echo "   $(getAscii 96),.$(getAscii 96)$(getAscii 36):      :$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYiiYYL"
+echo "    $(getAscii 34)$(getAscii 96);$(getAscii 36)$(getAscii 36).    .;PPb$(getAscii 36)$(getAscii 96).,.$(getAscii 96)$(getAscii 96)T$(getAscii 36)$(getAscii 36)YY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYiiiYYU:"
+echo "  $(getAscii 44) ;$(getAscii 36)P$(getAscii 36);;: ;;;;i$(getAscii 36)y$(getAscii 36)$(getAscii 34)$(getAscii 33)Y$(getAscii 36)$(getAscii 36)$(getAscii 36)b;$(getAscii 36)$(getAscii 36)$(getAscii 36)Y$(getAscii 36)YY$(getAscii 36)$(getAscii 36)YYYiiiYYiYY"
+echo "    $(getAscii 36)Fi$(getAscii 36)$(getAscii 36) .. $(getAscii 96)$(getAscii 96):iii.$(getAscii 96)-$(getAscii 44);YYYYY$(getAscii 36)$(getAscii 36)YY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYiiYiYYY"
+echo "    :Y$(getAscii 36)$(getAscii 36)rb $(getAscii 96)$(getAscii 96)$(getAscii 96)$(getAscii 96)  $(getAscii 96)_..;;i;YYY$(getAscii 36)YY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYYiYY:"
+echo "     :$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)i;;iiiiidYYYYYYYYYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYYiiYYYY."
+echo "      $(getAscii 96)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYYYYYYYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYYYiiiYYYYYY"
+echo "      .i$(getAscii 33)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYYYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYY$(getAscii 36)$(getAscii 36)YYiiiiiiYYYYYYY"
+echo "     :YYiii$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYYYYYY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YY$(getAscii 36)$(getAscii 36)$(getAscii 36)$(getAscii 36)YYiiiiiYYYYYYi$(getAscii 44)"

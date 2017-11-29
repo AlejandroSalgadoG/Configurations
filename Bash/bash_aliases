@@ -27,7 +27,7 @@ alias sdk="android& exit"
 alias studio="sh ~/android-studio/bin/studio.sh& exit"
 
 # Prints doge on the terminal
-alias doge="~/Dropbox/Bash/doge.sh" 
+alias doge="~/Github/Bash/doge.sh" 
 
 #Functions
 
