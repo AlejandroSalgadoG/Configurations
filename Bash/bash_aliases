@@ -2,7 +2,6 @@
 
 alias st="multi special; nitrogen --restore"
 
-alias thorkey="copy ~/.Apolo/key.txt"
 alias aliases="vim ~/Github/Bash/bash_aliases"
 alias bashrc="vim ~/Github/Bash/bashrc"
 alias vimc="vim ~/Github/Vim/VimPlugin/Main.vim"
@@ -14,6 +13,7 @@ alias shoot="import -window root screenshot.jpg"
 
 # Aliases to shorten linux commands
 alias x="exit"
+alias q="exit"
 alias e="make exe"
 alias k="killall"
 alias ps="ps -aux"
@@ -23,12 +23,16 @@ alias deb="sudo dpkg -i"
 alias untar="tar zxf"
 alias exe="chmod u+x"
 alias grep="grep --color"
-alias math="Mathematica &"
+alias math="/opt/MathematicaScripts/Mathematica &"
+alias cel="~/Android/Sdk/tools/emulator @WhatsappCel & exit"
 alias paint="kolourpaint"
+
+alias pass="copy ~/.Dca/pass.txt"
 
 alias search="pacman -Ss"
 alias install="sudo pacman -S"
 alias remove="sudo pacman -Rs"
+alias update="sudo pacman -Syu"
 alias fsearch="pkgfile"
 
 alias ls="ls --color"
@@ -44,15 +48,15 @@ alias git="git-special"
 
 # Functions
 
-setkey(){
+sk(){
     case "$1" in
-        "english" )
+        "en" )
             setxkbmap us -variant altgr-intl ;;
-        "español" )
+        "es" )
             setxkbmap latam ;;
         * )
             echo Help:
-            echo '  setkey english|español'
+            echo '  setkey en|es'
             return 1;;
     esac
 }
@@ -60,8 +64,8 @@ setkey(){
 win(){
     case "$1" in
         "on" )
-            sudo mount /dev/sda4 /mnt 
-            cd /mnt/Users/XIMENA/Desktop ;;
+            sudo mount /dev/sda4 /mnt
+            cd /mnt/Users/Alejandro/Desktop ;;
         "off" )
             cd
             sudo umount /dev/sda4 ;;
@@ -75,23 +79,22 @@ win(){
 open(){
      case "$1" in
         *.pdf )
-            mupdf $@  &;;
-        *.jpg | *.jpeg | *.png )
-            feh $@ ;;
+            evince $@ 2>/dev/null &;;
+        *.jpg | *.jpeg | *.JPG | *.png )
+            feh $@ &;;
         *.pptx | *.docx | *.ods | *.xlsx )
             libreoffice $@ & ;;
-        *.mp4 )
-            vlc $1 & ;;
+        *.mp4 | *.MP4)
+            deepin-movie $1 & ;;
         * )
             echo Help:
-            echo '  open file.[pdf|jpg|png]'
+            echo '  open file.[pdf|jpg|png|pptx|docx|ods|xlsx|mp4]'
             return 1;;
     esac
 }
 
 git-special(){
-
-    if echo $@ | grep -q commit ; then
+    if echo $@ | grep -q "commit -m" ; then
         \git commit -m "$3"
         return
     else
@@ -118,8 +121,8 @@ cd-git(){
 
     if pwd | grep -q $REPO ; then
 
-        BRANCH=$(\git rev-parse --abbrev-ref HEAD)
-        COMMIT=$(\git rev-parse --short HEAD)
+        BRANCH=$(\git rev-parse --abbrev-ref HEAD 2> /dev/null)
+        COMMIT=$(\git rev-parse --short HEAD 2> /dev/null)
         WKDIR=$(sed -e s%^.*$REPO%.%g <<< $PWD)
 
         PS1=$PS1_GIT
@@ -145,21 +148,25 @@ ubuntu(){
     esac
 }
 
-slurm(){
+vbox(){
     case "$1" in
         "on" )
-            vboxmanage startvm Slurmaster --type headless
-            vboxmanage startvm Slurm1 --type headless
-            vboxmanage startvm Slurm2 --type headless ;;
+            vboxmanage startvm Centos-node4 --type headless
+            vboxmanage startvm Centos-node3 --type headless
+            sleep 5
+            vboxmanage startvm Centos-node2 --type headless
+            vboxmanage startvm Centos-node1 --type headless ;;
         "off" )
-            vboxmanage controlvm Slurm1 savestate
-            vboxmanage controlvm Slurm2 savestate
-            vboxmanage controlvm Slurmaster savestate ;;
+            vboxmanage controlvm Centos-node1 acpipowerbutton
+            vboxmanage controlvm Centos-node2 acpipowerbutton
+            sleep 5
+            vboxmanage controlvm Centos-node3 acpipowerbutton
+            vboxmanage controlvm Centos-node4 acpipowerbutton ;;
         "list" )
             vboxmanage list runningvms ;;
         * )
             echo Help:
-            echo '  slurm [test] on|off|list'
+            echo '  vbox [machine] on|off|list'
             return 1 ;;
     esac
 }
