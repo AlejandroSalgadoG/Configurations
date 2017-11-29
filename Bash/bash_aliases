@@ -1,6 +1,8 @@
 #!/bin/bash
 
-alias clave="copy ~/.Apolo/key.txt"
+alias st="multi special; nitrogen --restore"
+
+alias thorkey="copy ~/.Apolo/key.txt"
 alias math="Mathematica &"
 alias aliases="vim ~/Github/Bash/bash_aliases"
 alias bashrc="vim ~/Github/Bash/bashrc"
@@ -42,8 +44,10 @@ open(){
             mupdf $@  &;;
         *.jpg | *.jpeg | *.png )
             feh $@ ;;
-        *pptx | *.docx )
-            libreoffice $@ ;;
+        *.pptx | *.docx | *.ods )
+            libreoffice $@ & ;;
+        *.mp4 )
+            vlc $1 & ;;
         * )
             echo Help:
             echo '  open file.[pdf|jpg|png]'
@@ -195,7 +199,7 @@ multi(){
                     echo "Output not recognised" ;;
             esac ;;
         "special" )
-            xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1 --output DP1 --auto --left-of HDMI1 ;;
+            xrandr --output HDMI1 --mode 1920x1080 --left-of DP1 --output DP1 --auto --left-of eDP1 ;;
         * )
             echo "$1 is not a valid option, use same or direction" ;;
     esac

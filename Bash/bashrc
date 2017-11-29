@@ -23,7 +23,7 @@ commit="$BLU"'$COMMIT'
 end="${YEL}-> $RS"
 
 PS1_NORMAL="$time $wkdir $end"
-PS1_GIT="$repo $branch $commit $gitdir $end"
+PS1_GIT="$time $repo $branch $gitdir $end"
 
 PS1=$PS1_NORMAL
 
@@ -35,3 +35,4 @@ fi
 
 export EDITOR=vim
 export LS_COLORS="di=0;32:fi=0;37:ln=0;36:ex=1;33:*.gz=1;31:*.bz2=1;31:*.pdf=0;31"
+export TERM=rxvt
