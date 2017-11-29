@@ -22,7 +22,7 @@ sed -i "64,124d" Bash/bash_aliases #search, slurm, cs, usb
 sed -i "72,111d" Bash/bash_aliases #multi
 
 sed -i "16d" Bash/bashrc
-sed -i '16iPS1="${HC}${WHI}\\T ${RED} you are in \\h \\w $YEL-> $RS"' Bash/bashrc
+sed -i '16iPS1="${HC}${WHI}\\T ${RED} you are in ${WHI}\\h ${RED}\\w $YEL-> $RS"' Bash/bashrc
 sed -i "24d" Bash/bashrc
 
 sed -i "s/Github\///g" Bash/bash_aliases
