@@ -52,7 +52,11 @@ git-special(){
 }
 
 cd-git(){
-    \cd "$1"
+    if [ -z $1 ]; then
+        \cd $HOME
+    else
+        \cd "$1"
+    fi
 
     if [ -d .git ]; then REPO=$(pwd |  basename `pwd`); fi
     if [ -z $REPO ]; then return; fi
