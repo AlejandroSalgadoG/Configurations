@@ -64,7 +64,7 @@ FYEL="\[\033[33m\]" # foreground yellow
 FBLE="\[\033[34m\]" # foreground blue
 
 if [ "$color_prompt" = yes ]; then
-    PS1="${HC}${FBLE}Alejandro $FYEL-> $RS"
+    PS1="${HC}${FBLE}you are in \w $FYEL-> $RS"
 else 
     PS2="$HC$FYEL&gt; $RS"
 fi
@@ -119,4 +119,3 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="$PATH:~/SDK/tools/:/usr/share/apache-maven-3.2.5/bin:/usr/bin/GeoGebra/"

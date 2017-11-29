@@ -11,12 +11,12 @@
 
 exec --no-startup-id nm-applet
 exec --no-startup-id feh --bg-fill ~/Pictures/doge.jpg
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 
+bindsym XF86MonBrightnessUp exec xbacklight -inc 30
+bindsym XF86MonBrightnessDown exec xbacklight -dec 30
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% 
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5% 
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle 
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -- -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
 
 set $mod Mod1
 
@@ -187,7 +187,7 @@ bar {
         statusline          $wh
         separator           $bl
         focused_workspace   $yw        $gr        $wh
-        active_workspace    $bl        $wh        $wh
+        active_workspace    $yw        $gr        $wh
         inactive_workspace  $gr        $gr        $wh
         urgent_workspace    $rd        $rd        $rd
     }

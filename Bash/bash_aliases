@@ -1,15 +1,11 @@
-source /home/alejandro/Github/ResRst/script.sh
-source /home/alejandro/Dropbox/Universidad/Compiladores/lexer_st0270/Test.sh
-alias antlr4="java -jar /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/antlr-4.5-complete.jar"
-alias comp="open /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/ST0270-2015-1-Practica-02.pdf"
-alias abook="open /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/Antlr4.pdf"
-alias gram="open /home/alejandro/Dropbox/Universidad/Compiladores/InfoPractica/Gramatica.pdf"
+alias vimc="vim /home/alejandro/Github/Vim/VimPlugin/Commands.vim"
+alias off="sudo poweroff"
+alias sl="ls -lh"
 
 # Alias for i3
 alias shoot="import -window root screenshot.jpg"
 
 # Alias to manage the latex compilation
-alias lpdf="pdflatex"
 alias cpdf="rm -f *.out *.dvi *.blg *.bbl *.aux *.log"
 alias cdiap="rm -f *.nav *.out *.snm *.toc *.aux *.log"
 alias dvi="xdvi"
@@ -28,16 +24,41 @@ alias bin="xxd -b"       # Prints the binary representation of a file
 alias untar="tar zxvf"
 alias exe="chmod u+x"
 
-# Aliases to open programs
-alias vilist="VBoxManage list runningvms"
-alias master="VBoxManage startvm Master --type headless &"
-alias slaves="(VBoxManage startvm Slave2 --type headless &) ; (VBoxManage startvm Slave1 --type headless &)"
-alias viconnect="ssh root@127.0.0.1 -p 2222"
-
 # Prints doge on the terminal
 alias doge="~/Github/Bash/doge.sh"
 
 # Functions
+zpp(){
+    RTSP=/home/alejandro/Github/Zpp/RTSP
+
+    case "$1" in
+        "a" )
+            cd $RTSP/Android/RTSP/app/src/main/java/sise/rtsp ;;
+        "c" )
+            cd $RTSP/CImplementation/Server ;;
+        "ce" )
+            cd $RTSP/CImplementation/Examples/Camera/ ;;
+        "co" )
+            cd $RTSP/Legacy/Full
+            javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ MultiServer.java
+            javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ Client.java
+            javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ RTPpacket.java
+            javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ Server.java
+            javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ ServerThread.java
+            javac -d /home/alejandro/Github/Zpp/RTSP/Legacy/Full/class/ VideoStream.java ;;
+        "j" )
+            cd $RTSP/JImplementation/Client ;;
+        "l" )
+            cd $RTSP/Legacy/Full ;;
+        * )
+            cd $RTSP ;;
+    esac
+}
+
+
+copy(){
+    xclip -sel clip < $1
+}
 
 find2(){
     find . -iname $1
@@ -47,7 +68,7 @@ multi(){
     if [ -z $1 ]; then
         xrandr --auto
     else
-        xrandr --output VGA1 --auto --$1-of LVDS1
+        xrandr --output DP1 --auto --$1-of eDP1
     fi
 }
 
@@ -97,7 +118,7 @@ pdfbib(){
         bibtex ${archivo/.tex/.aux}
         latex $1
         latex $1
-        lpdf $1
+        pdflatex $1
         cpdf
         open ${archivo/.tex/".pdf"}
     fi
@@ -113,5 +134,5 @@ pdf(){
 }
 
 diap(){
-    lpdf $1 && cdiap && archivo=$1 && open ${archivo/.tex/.pdf}
+    pdflatex $1 && cdiap && archivo=$1 && open ${archivo/.tex/.pdf}
 }
