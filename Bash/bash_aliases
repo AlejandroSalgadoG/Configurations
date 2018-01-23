@@ -243,7 +243,8 @@ multi(){
 }
 
 get(){
-    history | grep $1
+    pattern="$@"
+    history | grep "$pattern"
 }
 
 refresh(){
