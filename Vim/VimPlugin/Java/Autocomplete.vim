@@ -1,5 +1,7 @@
 au BufNewFile *.java :call Java()
 
+let cmd=g:cmd_comp
+
 function! Java()
     exe "normal ipublic class ".g:name."{\n\n
         \public ".g:name."(){\n\n}\n\n

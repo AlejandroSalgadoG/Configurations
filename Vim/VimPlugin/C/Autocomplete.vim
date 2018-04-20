@@ -1,5 +1,7 @@
 au BufNewFile *.c :call C()
 
+let cmd=g:cmd_comp
+
 function! C()
     exe "normal i#include <stdio.h>\n\n
         \int main(int argc, char *argv[]){\n\n\n\n

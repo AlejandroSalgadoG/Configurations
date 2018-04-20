@@ -4,8 +4,10 @@ let mouse="true"
 let makeThis="false"
 let extension=expand('%:e')
 let name=expand('%:r')
+let file=expand('%')
 
-let cmd="./"
+let cmd_comp="./".g:name " default command for compiled languages
+let cmd_inter="./".g:file " default command for interpreted languages
 let args=""
 let mkargs=""
 
@@ -13,7 +15,7 @@ noremap <F2> :let args=""<left>
 noremap <F3> :let cmd=""<left>
 noremap <F4> :let mkargs=""<left>
 noremap K :call MakeThis()<enter>
-noremap X :call MakeExe()<enter>
+noremap X :call GrantExe()<enter>
 noremap J gq<left>
 noremap L :noh<enter>
 noremap tt :tabnew<enter>
@@ -130,8 +132,8 @@ function! Run()
 
 endfunction
 
-function! MakeExe()
-    exe "w !chmod u+x ".expand('%')
+function! GrantExe()
+    exe "w !chmod u+x ".g:file
     echom "This file is now executable."
 endfunction
 

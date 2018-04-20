@@ -1,5 +1,7 @@
 au BufNewFile *.cs :call Csharp()
 
+let cmd=g:cmd_comp
+
 function! Csharp()
     exe "normal iusing System;\n"
     exe "normal opublic class ".g:name."{\n\n

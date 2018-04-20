@@ -1,5 +1,7 @@
 au BufNewFile *.asm :call Asm()
 
+let cmd=g:cmd_comp
+
 function! Asm()
     exe "normal isection .data\n\n\n
         \section .text\n

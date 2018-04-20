@@ -4,7 +4,7 @@ function! Gpp()
         if v:shell_error
             return
         endif
-        exe "!".g:cmd.expand('%:r')." ".g:args
+        exe "!".g:cmd." ".g:args
     else
         exe "normal tt"
         call MakeCppHead()

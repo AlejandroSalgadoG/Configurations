@@ -1,5 +1,7 @@
 au BufNewFile *.py :call Python()
 
+let cmd=g:cmd_inter
+
 function! Python()
     exe "normal i#!/bin/env python"
     exe "normal 2o"

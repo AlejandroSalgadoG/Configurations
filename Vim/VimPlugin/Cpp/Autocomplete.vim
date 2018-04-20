@@ -2,6 +2,8 @@ au BufNewFile *.C call Cpp()
 au BufNewFile *.cpp call Cpp()
 au BufNewFile *.h call Hpp()
 
+let cmd=g:cmd_comp
+
 function! Cpp()
     exe "normal i#include <iostream>\n\n
         \using namespace std;\n\n

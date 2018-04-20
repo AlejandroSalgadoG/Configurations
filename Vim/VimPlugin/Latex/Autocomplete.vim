@@ -1,6 +1,7 @@
 au BufNewFile *.tex :call Latex()
 
 let cmd="evince "
+
 noremap T :call Itemize()<enter>
 
 function! Latex()
