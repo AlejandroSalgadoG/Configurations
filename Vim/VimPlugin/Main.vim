@@ -14,6 +14,7 @@ let mkargs=""
 noremap <F2> :let args=""<left>
 noremap <F3> :let cmd=""<left>
 noremap <F4> :let mkargs=""<left>
+noremap # :set nu!<enter>
 noremap K :call MakeThis()<enter>
 noremap X :call GrantExe()<enter>
 noremap J gq<left>
