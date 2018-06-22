@@ -1,4 +1,5 @@
 let column="false"
+let diff="false"
 let indent="false"
 let mouse="true"
 let makeThis="false"
@@ -21,6 +22,7 @@ noremap J gq<left>
 noremap L :noh<enter>
 noremap tt :tabnew<enter>
 noremap H :map<enter>
+noremap C :call Diff()<enter>
 noremap E :call Indent()<enter>
 noremap S :call Print()<enter>
 noremap M :call Mouse()<enter>
@@ -165,6 +167,18 @@ endfunction
 function! Clean()
     exe '%s/\s\+$//e'
     exe '%s/\t/    /ge'
+endfunction
+
+function! Diff()
+    if g:diff == "true"
+        diffoff
+        echom "Diff disabled"
+        let g:diff="false"
+    else
+        windo diffthis
+        echom "Diff enabled"
+        let g:diff="true"
+    endif
 endfunction
 
 function! Indent()
