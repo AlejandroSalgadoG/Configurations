@@ -26,6 +26,8 @@ hi texCmdName ctermfg=Yellow
 hi texSection ctermfg=White
 hi Special cterm=NONE ctermfg=3
 hi texStatement cterm=NONE ctermfg=7
-hi DiffChange cterm=NONE ctermbg=4 ctermfg=7
-hi DiffText ctermfg=3
-hi DiffDelete ctermbg=1 ctermfg=0
+
+hi DiffChange cterm=NONE ctermbg=Black ctermfg=white                             
+hi DiffText cterm=bold ctermbg=Black ctermfg=Yellow                              
+hi DiffAdd cterm=bold ctermbg=Black ctermfg=white                                
+hi DiffDelete ctermbg=Black ctermfg=White
