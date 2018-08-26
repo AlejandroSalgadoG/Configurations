@@ -1,6 +1,6 @@
 au BufNewFile *.py :call Python()
 
-let cmd=g:cmd_inter
+let cmd="python "
 
 function! Python()
     exe "normal i#!/bin/env python"

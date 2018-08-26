@@ -1,6 +1,6 @@
 au BufNewFile *.tex :call Latex()
 
-let cmd="evince "
+let cmd="make exe"
 
 noremap T :call Itemize()<enter>
 
@@ -18,7 +18,9 @@ function! Latex()
 endfunction
 
 function! Itemize()
+    set nocindent
     exe "normal o\\begin{itemize}\n
         \\t\\item\n
-        \\b\\end{itemize}"
+        \\\end{itemize}"
+    set cindent
 endfunction

@@ -1,10 +1,11 @@
 au BufNewFile *.java :call Java()
 
-let cmd=g:cmd_comp
+let cmd="make exe"
 
 function! Java()
-    exe "normal ipublic class ".g:name."{\n\n
-        \public ".g:name."(){\n\n}\n\n
+    let name=expand('%:r')
+    exe "normal ipublic class ".name."{\n\n
+        \public ".name."(){\n\n}\n\n
         \public static void main(String[] args){\n\n
         \}\n
         \}"
