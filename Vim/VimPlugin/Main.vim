@@ -7,9 +7,7 @@ let extension=expand('%:e')
 let name=expand('%:r')
 let file=expand('%')
 
-let cmd_comp="./".g:name " default command for compiled languages
-let cmd_inter="./".g:file " default command for interpreted languages
-let args=""
+let args="%" "by default the commands will use the current file as parameter
 let mkargs=""
 
 noremap <F2> :let args=""<left>
