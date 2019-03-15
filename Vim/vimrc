@@ -6,6 +6,7 @@ set cursorline " Line over the current position
 set autoread " Automatically update the files if an external change occurs
 set encoding=utf-8 " Set defult encoding to utf-8
 set fileencoding=utf-8 " Set defult encoding to utf-8
+set cinkeys-=0# " Disable auto indentation in python
 
 " indentation with 4 spaces
 set tabstop=4
