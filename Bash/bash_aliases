@@ -26,6 +26,7 @@ alias grep="grep --color"
 alias math="/opt/MathematicaScripts/Mathematica &"
 alias cel="~/Android/Sdk/tools/emulator @WhatsappCel & exit"
 alias paint="kolourpaint"
+alias sound="pavucontrol"
 
 alias pass="copy ~/.Dca/pass.txt"
 
@@ -77,15 +78,15 @@ win(){
 }
 
 open(){
-     case "$1" in
+    case "$1" in
         *.pdf )
-            evince $@ 2>/dev/null &;;
+           evince "$1" 2>/dev/null &;;
         *.jpg | *.jpeg | *.JPG | *.png )
-            feh $@ &;;
+           feh "$1" &;;
         *.pptx | *.docx | *.ods | *.xlsx )
-            libreoffice $@ & ;;
+           libreoffice "$1" & ;;
         *.mp4 | *.MP4)
-            deepin-movie $1 & ;;
+            deepin-movie "$1" & ;;
         * )
             echo Help:
             echo '  open file.[pdf|jpg|png|pptx|docx|ods|xlsx|mp4]'
@@ -236,7 +237,7 @@ multi(){
                     echo "Output not recognised" ;;
             esac ;;
         "special" )
-            xrandr --output HDMI1 --mode 1920x1080 --left-of DP1 --output DP1 --auto --left-of eDP1 ;;
+            xrandr --output HDMI1 --mode 1920x1080 --left-of eDP1 --output DP1 --auto --right-of eDP1 ;;
         * )
             echo "$1 is not a valid option, use same or direction" ;;
     esac
