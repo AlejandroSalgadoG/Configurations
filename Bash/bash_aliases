@@ -111,23 +111,22 @@ git-special(){
 }
 
 cd-git(){
-    if [ -z $1 ]; then
+    if [ -z "$1" ]; then
         \cd $HOME
     else
+        echo "ok"
         \cd "$1"
     fi
 
-    if [ -d .git ]; then REPO=$(pwd |  basename `pwd`); fi
-    if [ -z $REPO ]; then return; fi
+    if [ -d .git ]; then REPO=${PWD##*/}; fi
+    if [ -z "$REPO" ]; then return; fi
 
-    if pwd | grep -q $REPO ; then
-
+    if pwd | grep -q "$REPO" ; then
         BRANCH=$(\git rev-parse --abbrev-ref HEAD 2> /dev/null)
         COMMIT=$(\git rev-parse --short HEAD 2> /dev/null)
-        WKDIR=$(sed -e s%^.*$REPO%.%g <<< $PWD)
+        WKDIR=$(sed -e s%^.*"$REPO"%.%g <<< $PWD)
 
         PS1=$PS1_GIT
-
     else
         PS1=$PS1_NORMAL
         unset REPO
