@@ -30,11 +30,10 @@ alias sound="pavucontrol"
 
 alias pass="copy ~/.Dca/pass.txt"
 
-alias search="pacman -Ss"
-alias install="sudo pacman -S"
-alias remove="sudo pacman -Rs"
-alias update="sudo pacman -Syu"
-alias fsearch="pkgfile"
+alias search="apt-cache search"
+alias install="sudo apt-get install"
+alias remove="sudo apt-get remove --purge"
+alias update="sudo apt-get update"
 
 alias ls="ls --color"
 alias ll='ls -alF'
@@ -114,7 +113,6 @@ cd-git(){
     if [ -z "$1" ]; then
         \cd $HOME
     else
-        echo "ok"
         \cd "$1"
     fi
 
