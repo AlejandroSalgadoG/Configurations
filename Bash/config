@@ -14,9 +14,9 @@ exec --no-startup-id nitrogen --restore
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5%
-bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -D pulse sset Master toggle
 
 set $mod Mod1
 
