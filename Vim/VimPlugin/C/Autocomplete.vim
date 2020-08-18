@@ -1,6 +1,6 @@
 au BufNewFile *.c :call C()
 
-let cmd=g:cmd_comp
+let cmd="./".g:name." ".g:args
 
 function! C()
     exe "normal i#include <stdio.h>\n\n

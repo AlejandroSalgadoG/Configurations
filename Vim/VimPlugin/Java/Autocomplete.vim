@@ -1,6 +1,7 @@
 au BufNewFile *.java :call Java()
 
-let cmd="make exe"
+let cmd="java"
+let args="%:r"
 
 function! Java()
     let name=expand('%:r')
