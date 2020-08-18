@@ -61,6 +61,8 @@ function Start()
         call Load("Haskell")
     elseif g:extension == "asm"
         call Load("Asm")
+    elseif g:extension == "html"
+        call Load("Html")
     else
         call Load("Other")
     endif
@@ -83,7 +85,7 @@ function! Load(program)
 
     if filereadable(compile)
         exe "so ".compile
-    else
+    elseif filereadable(interpret)
         exe "so ".interpret
     endif
 endfunction
@@ -107,9 +109,9 @@ function! Print()
 endfunction
 
 function! Run()
-    if g:extension == "C" || g:extension == "cpp"
+    if g:extension == "C" || g:extension == "cpp" 
         :call Gpp()
-    elseif g:extension == "c"
+    elseif g:extension == "c" || g:extension == "cu"
         :call Gcc()
     elseif g:extension == "sh"
         :call BashC()
